@@ -1,0 +1,6 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "exec": "rm -rf dist && tsc && tsc-alias -p tsconfig.json && fastify start  dist/app.js"
+}
+  
