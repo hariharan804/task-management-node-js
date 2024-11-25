@@ -10,7 +10,7 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
   fastify.register(swagger, {
     swagger: {
       info: {
-        title: "Todos Backend",
+        title: "Task Management Backend",
         description: "API documentation",
         version: "0.0.1",
       },

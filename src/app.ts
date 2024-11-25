@@ -39,9 +39,9 @@ void fastify.register(app, options);
 const start = async () => {
   try {
     const PORT = process.env.PORT || 6000; // Use port from environment or default to 6000
-    await fastify.listen({ port: Number(PORT), host: "0.0.0.0" }); // Ensure it listens on all network interfaces
+  const server =  await fastify.listen({ port: Number(PORT), host: "0.0.0.0" }); // Ensure it listens on all network interfaces
     fastify.log.info(`Fastify Server listening on port ${PORT}`);
-    console.log( `🚀 Fastify Server listening on port ${PORT} 🔥 `);
+    console.log( `🚀 Fastify Server listening on port ${PORT} 🔥 `, server);
   } catch (error) {
     fastify.log.error(error);
     process.exit(1);
