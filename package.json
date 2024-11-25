@@ -26,6 +26,7 @@
     "bcryptjs": "^2.4.3",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
+    "firebase": "^11.0.2",
     "fluent-json-schema": "^5.0.0",
     "jsonwebtoken": "^9.0.2",
     "knex": "^2.5.1",
