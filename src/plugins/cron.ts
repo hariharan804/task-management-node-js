@@ -15,7 +15,7 @@ export const TaskUpdateCronJob  = (completedDate: any) => {
 export const checkAndUpdateTasks =   () => {
 
 // Define a cron job to update statuses
-cron.schedule('*/1 * * * *', async () => {
+cron.schedule('*/10 * * * *', async () => {
     console.log('Cron job running:', new Date().toLocaleString());
   
     try {
