@@ -3,6 +3,7 @@ import Fastify, { FastifyPluginAsync } from "fastify";
 import v1 from "./routes/v1";
 import { cpus } from "os";
 import { join } from "path";
+import { checkAndUpdateTasks } from "plugins/cron";
 
 process.env.UV_THREADPOOL_SIZE = String(cpus().length);
 
@@ -22,7 +23,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
     dir: join(__dirname, "plugins"),
     options: opts,
   });
-
+  checkAndUpdateTasks()
   // Register API routes
   void fastify.register(v1);
 };
