@@ -1,5 +1,7 @@
 import { config } from "dotenv";
-config({ path: ".env" });
+const env = process.env.NODE_ENV || 'development';
+config({ path: `.env.${env}` });
+// config({ path: ".env" });
 
 const {
   DB_NAME,
@@ -9,6 +11,7 @@ const {
   DB_PORT,
   DB_DIALECT,
   NODE_ENV,
+  SERVER_PORT,
 }: any = process.env;
 
 export default {
@@ -19,4 +22,5 @@ export default {
   DB_PORT,
   DB_DIALECT,
   NODE_ENV,
+  SERVER_PORT,
 };

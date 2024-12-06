@@ -4,6 +4,17 @@
     "require": ["tsconfig-paths/register"]
   },
   "compilerOptions": {
+    "removeComments": true,
+    "lib": [
+      "esnext"
+    ],
+
+    "target": "ESNext", // Or higher
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,
+    
     "outDir": "dist",
     "baseUrl": "./src",
     "resolveJsonModule": true,
