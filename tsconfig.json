@@ -20,6 +20,7 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@config": ["config/index"],
+      "@routes": ["routes/index"],
       "@helpers": ["helpers/index"],
       "@controllers": ["controllers/index"]
     },

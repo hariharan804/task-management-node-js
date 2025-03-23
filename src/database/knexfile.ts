@@ -1,14 +1,14 @@
-import { config } from "dotenv";
-import { Knex } from "knex";
-import { resolve } from "path";
-const env = process.env.NODE_ENV || "development";
+import { config } from 'dotenv';
+import { Knex } from 'knex';
+import { resolve } from 'path';
+const env = process.env.NODE_ENV || 'development';
 // config({ path: `.env.${env}` });
 console.log(
-  "🚀 ~ resolve(__dirname, ",
-  resolve(__dirname, "..", "..", `.env.${env}`),
+  '🚀 ~ resolve(__dirname, ',
+  resolve(__dirname, '..', '..', `.env.${env}`)
 );
-config({ path: resolve(__dirname, "..", "..", `.env.${env}`) });
-console.log("🚀 ~ DB env :", `.env.${env}`);
+config({ path: resolve(__dirname, '..', '..', `.env.${env}`) });
+console.log('🚀 ~ DB env :', `.env.${env}`);
 
 interface IKnexConfig {
   [key: string]: Knex.Config;
@@ -19,7 +19,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD }: any =
 
 const configs: IKnexConfig = {
   development: {
-    client: "postgresql",
+    client: 'postgresql',
     connection: {
       host: DB_HOST,
       database: DB_NAME,
@@ -32,19 +32,19 @@ const configs: IKnexConfig = {
       max: 10,
     },
     migrations: {
-      tableName: "knex_migrations",
-      extension: "ts",
-      directory: "./migrations",
+      tableName: 'knex_migrations',
+      extension: 'ts',
+      directory: './migrations',
     },
     seeds: {
-      directory: "./seeders",
+      directory: './seeders',
     },
     debug: !!process.env.DB_DEBUG,
     useNullAsDefault: true,
   },
 
   staging: {
-    client: "postgresql",
+    client: 'postgresql',
     connection: {
       host: DB_HOST,
       database: DB_NAME,
@@ -57,19 +57,19 @@ const configs: IKnexConfig = {
       max: 10,
     },
     migrations: {
-      tableName: "knex_migrations",
-      directory: "./migrations",
-      extension: ".ts",
+      tableName: 'knex_migrations',
+      directory: './migrations',
+      extension: '.ts',
     },
     seeds: {
-      directory: "./seeders",
+      directory: './seeders',
     },
     debug: !!process.env.DB_DEBUG,
     useNullAsDefault: true,
   },
 
   production: {
-    client: "postgresql",
+    client: 'postgresql',
     connection: {
       host: DB_HOST,
       database: DB_NAME,
@@ -82,12 +82,12 @@ const configs: IKnexConfig = {
       max: 10,
     },
     migrations: {
-      tableName: "knex_migrations",
-      directory: "./migrations",
-      extension: ".ts",
+      tableName: 'knex_migrations',
+      directory: './migrations',
+      extension: '.ts',
     },
     seeds: {
-      directory: "./seeders",
+      directory: './seeders',
     },
     useNullAsDefault: true,
   },

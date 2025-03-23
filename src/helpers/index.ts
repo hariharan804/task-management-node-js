@@ -1,2 +1,2 @@
-export * from "./responseHandler";
-export * from "./schema";
+export * from './responseHandler';
+export * from './schema';

@@ -1,9 +1,9 @@
-import AutoLoad, { AutoloadPluginOptions } from "@fastify/autoload";
-import { env } from "@config";
-import Fastify from "fastify";
+import { env } from '@config';
+import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
+import Fastify from 'fastify';
 // import v1 from './routes/v1';
-import { cpus } from "os";
-import { join } from "path";
+import { cpus } from 'os';
+import { join } from 'path';
 // Set UV_THREADPOOL_SIZE for async operations
 process.env.UV_THREADPOOL_SIZE = String(cpus().length);
 
@@ -18,14 +18,14 @@ const options: AppOptions = {};
 const app = async (fastify: any, opts: AppOptions) => {
   // Register plugins from the "plugins" directory
   await fastify.register(AutoLoad, {
-    dir: join(__dirname, "plugins"),
+    dir: join(__dirname, 'plugins'),
     options: opts,
   });
 
   // Health check route
-  fastify.get("/health", async () => {
+  fastify.get('/health', async () => {
     return {
-      status: "okk",
+      status: 'okk',
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
     };
@@ -39,12 +39,12 @@ const app = async (fastify: any, opts: AppOptions) => {
 const fastify = Fastify({
   logger: {
     transport: {
-      target: "pino-pretty",
+      target: 'pino-pretty',
       options: {
         destination: 1,
         colorize: true,
-        translateTime: "HH:MM:ss.l",
-        ignore: "pid,hostname",
+        translateTime: 'HH:MM:ss.l',
+        ignore: 'pid,hostname',
       },
     },
   },
@@ -59,15 +59,15 @@ const startServer = async () => {
   try {
     const address = await fastify.listen({
       port: Number(env.SERVER_PORT),
-      host: "0.0.0.0",
+      host: '0.0.0.0',
     });
     console.log(
-      `Server listening at ${address} Environment: ${env.NODE_ENV} 🔥`,
+      `Server listening at ${address} Environment: ${env.NODE_ENV} 🔥`
     );
   } catch (err: any) {
-    if (err?.code === "EADDRINUSE") {
+    if (err?.code === 'EADDRINUSE') {
       console.log(
-        `Port ${env.SERVER_PORT} is already in use, please try again later`,
+        `Port ${env.SERVER_PORT} is already in use, please try again later`
       );
     } else {
       console.error(err);

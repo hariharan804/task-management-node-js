@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class RoleMasters extends Model {
   static get tableName() {
-    return "role_masters";
+    return 'role_masters';
   }
 
   id!: number;
@@ -16,17 +16,17 @@ class RoleMasters extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["name"],
+      type: 'object',
+      required: ['name'],
       properties: {
-        id: { type: "integer" },
-        name: { type: "string" },
-        description: { type: "string" },
-        is_active: { type: "boolean" },
-        updated_by: { type: "integer" },
-        created_by: { type: "integer" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        name: { type: 'string' },
+        description: { type: 'string' },
+        is_active: { type: 'boolean' },
+        updated_by: { type: 'integer' },
+        created_by: { type: 'integer' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

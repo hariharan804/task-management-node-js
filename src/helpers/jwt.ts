@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 const ACCESS_TOKEN_SECRET =
-  process.env.ACCESS_TOKEN_SECRET || "tasks-access-token-secretAQWER%$$3456";
+  process.env.ACCESS_TOKEN_SECRET || 'tasks-access-token-secretAQWER%$$3456';
 
 // Access token expiry (e.g., 10 minutes)
-const ACCESS_TOKEN_EXPIRES_IN = "1d";
+const ACCESS_TOKEN_EXPIRES_IN = '1d';
 
 // Function to generate access token
 export const generateAccessToken = async (user: object) => {
@@ -17,7 +17,7 @@ export const verifyAccessToken = async (token: string) => {
   try {
     return await jwt.verify(token, ACCESS_TOKEN_SECRET);
   } catch (err) {
-    console.log("🚀 ~ verifyAccessToken ~ err:", err);
+    console.log('🚀 ~ verifyAccessToken ~ err:', err);
     return null;
   }
 };

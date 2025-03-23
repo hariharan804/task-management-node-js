@@ -1,26 +1,26 @@
-import fp from "fastify-plugin";
-import swagger, { SwaggerOptions } from "@fastify/swagger";
-import { FastifyPluginCallback } from "fastify";
-import { fastifySwaggerUi } from "@fastify/swagger-ui";
+import swagger, { SwaggerOptions } from '@fastify/swagger';
+import { fastifySwaggerUi } from '@fastify/swagger-ui';
+import { FastifyPluginCallback } from 'fastify';
+import fp from 'fastify-plugin';
 
 const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
-  fastify: any,
+  fastify: any
   // options
 ) => {
   fastify.register(swagger, {
     swagger: {
       info: {
-        title: "Task Management Backend",
-        description: "API documentation",
-        version: "0.0.1",
+        title: 'Task Management Backend',
+        description: 'API documentation',
+        version: '0.0.1',
       },
     },
     exposeRoute: true,
   });
   fastify.register(fastifySwaggerUi, {
-    routePrefix: "/swagger",
+    routePrefix: '/swagger',
     uiConfig: {
-      docExpansion: "list",
+      docExpansion: 'list',
       deepLinking: false,
     },
     uiHooks: {
@@ -34,7 +34,7 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
     staticCSP: true,
     transformStaticCSP: (header: any) => header,
     transformSpecification: (
-      swaggerObject: any,
+      swaggerObject: any
       //  request: any, reply: any
     ) => {
       return swaggerObject;

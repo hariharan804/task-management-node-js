@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class Notifications extends Model {
   static get tableName() {
-    return "notifications";
+    return 'notifications';
   }
 
   id!: number;
@@ -15,25 +15,25 @@ class Notifications extends Model {
   static relationMappings = {
     user: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/users", // path to Users model
+      modelClass: __dirname + '/users', // path to Users model
       join: {
-        from: "notifications.user_id",
-        to: "users.id",
+        from: 'notifications.user_id',
+        to: 'users.id',
       },
     },
   };
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["user_id", "message"],
+      type: 'object',
+      required: ['user_id', 'message'],
       properties: {
-        id: { type: "integer" },
-        user_id: { type: "integer" },
-        message: { type: "string" },
-        is_read: { type: "boolean" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        user_id: { type: 'integer' },
+        message: { type: 'string' },
+        is_read: { type: 'boolean' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

@@ -1,11 +1,11 @@
-import { handleResponse, responseType } from "@helpers";
-import bcrypt from "bcryptjs";
-import { FastifyReply, FastifyRequest } from "fastify";
-import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { firebaseConfig } from "helpers/constant";
-import { generateAccessToken } from "helpers/functions";
-import Users from "models/users";
+import { handleResponse, responseType } from '@helpers';
+import bcrypt from 'bcryptjs';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { initializeApp } from 'firebase/app';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { firebaseConfig } from 'helpers/constant';
+import { generateAccessToken } from 'helpers/functions';
+import Users from 'models/users';
 
 type payload = {
   // id?: number;
@@ -20,13 +20,13 @@ type payload = {
 
 export async function SIGNUP(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
     const {
       name,
       created_by,
-      email = "",
+      email = '',
       is_active,
       role_id,
       updated_by,
@@ -36,13 +36,13 @@ export async function SIGNUP(
 
     if (existingUser) {
       return handleResponse(request, reply, responseType?.NOT_FOUND, {
-        error: { message: "User already existing" },
+        error: { message: 'User already existing' },
       });
     }
     // Password Hashing
     const hashPassword: string = bcrypt.hashSync(
       password,
-      bcrypt.genSaltSync(4),
+      bcrypt.genSaltSync(4)
     );
 
     const app = initializeApp(firebaseConfig);
@@ -54,14 +54,14 @@ export async function SIGNUP(
       userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
     } catch (error: any) {
       throw new Error(error.message);
     }
     const token = userCredential._tokenResponse.idToken;
     const uid = userCredential.user.uid;
-    console.log("🚀 ~ uid:", uid, "------", token);
+    console.log('🚀 ~ uid:', uid, '------', token);
     const user = await Users.query().insert({
       name,
       email,
@@ -80,7 +80,7 @@ export async function SIGNUP(
       data: { accessToken: accessToken, firebaseToken: token, id: user?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error);
+    console.log('🚀 ~ error:', error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

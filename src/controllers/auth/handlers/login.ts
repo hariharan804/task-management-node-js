@@ -1,11 +1,11 @@
-import { handleResponse, responseType } from "@helpers";
-import { FastifyReply, FastifyRequest } from "fastify";
-import Users from "models/users";
-import bcrypt from "bcryptjs";
-import { generateAccessToken } from "helpers/functions";
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseConfig } from "helpers/constant";
+import { handleResponse, responseType } from '@helpers';
+import bcrypt from 'bcryptjs';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { firebaseConfig } from 'helpers/constant';
+import { generateAccessToken } from 'helpers/functions';
+import Users from 'models/users';
 
 type payload = {
   email: string;
@@ -13,10 +13,10 @@ type payload = {
 };
 export async function LOGIN(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
-    const { email, password } = request?.body;
+    const { email, password } = request?.body || {};
 
     const app = initializeApp(firebaseConfig);
 
@@ -24,11 +24,11 @@ export async function LOGIN(
     const auth = getAuth(app);
 
     const user = await Users.query().select().where({ email }).first();
-    console.log("🚀 ~ user:", user);
+    console.log('🚀 ~ user:', user);
 
     if (!user) {
       return handleResponse(request, reply, responseType?.NOT_FOUND, {
-        error: { message: "User not found" },
+        error: { message: 'User not found' },
       });
     }
 
@@ -38,28 +38,28 @@ export async function LOGIN(
 
     if (!correctPassword) {
       return handleResponse(request, reply, responseType?.FORBIDDEN, {
-        error: { message: "Invalid password" },
+        error: { message: 'Invalid password' },
       });
     }
     let userCredential: any;
     try {
       userCredential = await signInWithEmailAndPassword(auth, email, password);
       // console.log("🚀 ~ userCredential:", userCredential);
-    } catch (error: any) {
+    } catch {
       // console.log("🚀 ~ error:", error);
       return handleResponse(request, reply, responseType?.FORBIDDEN, {
-        error: { message: "Invalid user or password" },
+        error: { message: 'Invalid user or password' },
       });
     }
     const token = userCredential._tokenResponse.idToken;
-    console.log("🚀 ~ token:", token);
+    console.log('🚀 ~ token:', token);
 
     const accessToken = generateAccessToken({ userId: user?.id });
     return handleResponse(request, reply, responseType?.OK, {
       data: { accessToken: accessToken, firebaseToken: token, id: user?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error);
+    console.log('🚀 ~ error:', error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

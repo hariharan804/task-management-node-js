@@ -1,4 +1,4 @@
-const knex = require("knex");
+const knex = require('knex');
 
 // const DB_HOST = 'localhost',
 //   DB_NAME = 'blog',
@@ -16,7 +16,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env;
 
 const configs = {
   development: {
-    client: "postgresql",
+    client: 'postgresql',
     connection: {
       host: DB_HOST,
       database: DB_NAME,
@@ -36,25 +36,25 @@ const configs = {
 };
 
 async function dropAllTables() {
-  const config = configs["development"];
+  const config = configs['development'];
   const db = knex(config);
 
   if (db) {
     try {
       // Drop all tables in the public schema with CASCADE to handle dependencies
-      await db.raw("DROP SCHEMA public CASCADE;");
+      await db.raw('DROP SCHEMA public CASCADE;');
 
       // Recreate the schema after dropping
-      await db.raw("CREATE SCHEMA public;");
+      await db.raw('CREATE SCHEMA public;');
 
-      console.log("All tables dropped successfully.");
+      console.log('All tables dropped successfully.');
     } catch (err) {
-      console.error("Error dropping tables:", err);
+      console.error('Error dropping tables:', err);
     } finally {
       await db.destroy();
     }
   } else {
-    console.error("Error: Database not found!");
+    console.error('Error: Database not found!');
   }
 }
 

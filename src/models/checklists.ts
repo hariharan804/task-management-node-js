@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class Checklists extends Model {
   static get tableName() {
-    return "checklists";
+    return 'checklists';
   }
 
   id!: number;
@@ -18,28 +18,28 @@ class Checklists extends Model {
   static relationMappings = {
     task: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/tasks", // path to Tasks model
+      modelClass: __dirname + '/tasks', // path to Tasks model
       join: {
-        from: "checklists.task_id",
-        to: "tasks.id",
+        from: 'checklists.task_id',
+        to: 'tasks.id',
       },
     },
   };
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["name"],
+      type: 'object',
+      required: ['name'],
       properties: {
-        id: { type: "integer" },
-        task_id: { type: "integer" },
-        name: { type: "string" },
-        description: { type: "string" },
-        is_active: { type: "boolean" },
-        created_by: { type: "integer" },
-        updated_by: { type: "integer" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        task_id: { type: 'integer' },
+        name: { type: 'string' },
+        description: { type: 'string' },
+        is_active: { type: 'boolean' },
+        created_by: { type: 'integer' },
+        updated_by: { type: 'integer' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

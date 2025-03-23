@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class Permissions extends Model {
   static get tableName() {
-    return "permissions";
+    return 'permissions';
   }
 
   id!: number;
@@ -12,13 +12,13 @@ class Permissions extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["name"],
+      type: 'object',
+      required: ['name'],
       properties: {
-        id: { type: "integer" },
-        name: { type: "string" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        name: { type: 'string' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

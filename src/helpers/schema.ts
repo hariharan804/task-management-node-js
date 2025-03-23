@@ -1,64 +1,64 @@
-import Schema, { JSONSchema } from "fluent-json-schema";
+import Schema, { JSONSchema } from 'fluent-json-schema';
 
 export const makeResponseSchema = (response: JSONSchema) => {
   const responseType: Record<string, JSONSchema> = {
-    "200": response,
-    "400": Schema.object()
-      .description("Bad Request")
-      .prop("error", Schema.boolean())
-      .prop("message", Schema.string())
+    '200': response,
+    '400': Schema.object()
+      .description('Bad Request')
+      .prop('error', Schema.boolean())
+      .prop('message', Schema.string())
 
       .prop(
-        "error",
+        'error',
         Schema.object()
-          .prop("isError", Schema.boolean())
-          .prop("message", Schema.string())
-          .prop("origin", Schema.string())
-          .prop("timestamp", Schema.string()),
+          .prop('isError', Schema.boolean())
+          .prop('message', Schema.string())
+          .prop('origin', Schema.string())
+          .prop('timestamp', Schema.string())
       )
       .valueOf() as JSONSchema,
-    "401": Schema.object()
-      .description("Un Authorized response")
+    '401': Schema.object()
+      .description('Un Authorized response')
       .prop(
-        "error",
+        'error',
         Schema.object()
-          .prop("isError", Schema.boolean())
-          .prop("message", Schema.string())
-          .prop("origin", Schema.string())
-          .prop("timestamp", Schema.string()),
+          .prop('isError', Schema.boolean())
+          .prop('message', Schema.string())
+          .prop('origin', Schema.string())
+          .prop('timestamp', Schema.string())
       )
       .valueOf() as JSONSchema,
-    "404": Schema.object()
-      .description("Not Found")
+    '404': Schema.object()
+      .description('Not Found')
       .prop(
-        "error",
+        'error',
         Schema.object()
-          .prop("isError", Schema.boolean())
-          .prop("message", Schema.string())
-          .prop("origin", Schema.string())
-          .prop("timestamp", Schema.string()),
+          .prop('isError', Schema.boolean())
+          .prop('message', Schema.string())
+          .prop('origin', Schema.string())
+          .prop('timestamp', Schema.string())
       )
       .valueOf() as JSONSchema,
-    "409": Schema.object()
-      .description("Error Response")
+    '409': Schema.object()
+      .description('Error Response')
       .prop(
-        "error",
+        'error',
         Schema.object()
-          .prop("isError", Schema.boolean())
-          .prop("message", Schema.string())
-          .prop("origin", Schema.string())
-          .prop("timestamp", Schema.string()),
+          .prop('isError', Schema.boolean())
+          .prop('message', Schema.string())
+          .prop('origin', Schema.string())
+          .prop('timestamp', Schema.string())
       )
       .valueOf() as JSONSchema,
-    "500": Schema.object()
-      .description("Internal Server Error Response")
+    '500': Schema.object()
+      .description('Internal Server Error Response')
       .prop(
-        "error",
+        'error',
         Schema.object()
-          .prop("isError", Schema.boolean())
-          .prop("message", Schema.string())
-          .prop("origin", Schema.string())
-          .prop("timestamp", Schema.string()),
+          .prop('isError', Schema.boolean())
+          .prop('message', Schema.string())
+          .prop('origin', Schema.string())
+          .prop('timestamp', Schema.string())
       )
       .valueOf() as JSONSchema,
   };

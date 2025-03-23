@@ -1,10 +1,10 @@
-import { handleResponse, responseType } from "@helpers";
-import { FastifyReply, FastifyRequest } from "fastify";
-import ProjectMembers from "models/projectMembers";
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { handleResponse, responseType } from '@helpers';
+import ProjectMembers from 'models/projectMembers';
 
 export async function GET_ALL(
   request: FastifyRequest<{ Querystring: { is_active?: boolean } }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
     const { is_active = true } = request?.query;
@@ -21,7 +21,7 @@ export async function GET_ALL(
     return handleResponse(request, reply, responseType?.OK, {
       data: { projectMembers: result, overallCount },
     });
-  } catch (error: any) {
+  } catch {
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

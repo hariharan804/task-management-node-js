@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class Users extends Model {
   static get tableName() {
-    return "users";
+    return 'users';
   }
 
   id!: number;
@@ -20,43 +20,43 @@ class Users extends Model {
   static relationMappings = {
     roleData: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/role_masters", // path to RoleMasters model
+      modelClass: __dirname + '/role_masters', // path to RoleMasters model
       join: {
-        from: "users.role_id",
-        to: "role_masters.id",
+        from: 'users.role_id',
+        to: 'role_masters.id',
       },
     },
     projects: {
       relation: Model.HasManyRelation,
-      modelClass: __dirname + "/projects", // path to Projects model
+      modelClass: __dirname + '/projects', // path to Projects model
       join: {
-        from: "users.id",
-        to: "projects.manager_id",
+        from: 'users.id',
+        to: 'projects.manager_id',
       },
     },
   };
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["name", "firebase_id", "password", "email"],
+      type: 'object',
+      required: ['name', 'firebase_id', 'password', 'email'],
       properties: {
-        id: { type: "integer" },
-        role_id: { type: "integer" },
-        name: { type: "string" },
-        firebase_id: { type: "string" },
-        password: { type: "string" },
-        email: { type: "string" },
-        is_active: { type: "boolean" },
-        created_by: { type: "integer" },
-        updated_by: { type: "integer" },
+        id: { type: 'integer' },
+        role_id: { type: 'integer' },
+        name: { type: 'string' },
+        firebase_id: { type: 'string' },
+        password: { type: 'string' },
+        email: { type: 'string' },
+        is_active: { type: 'boolean' },
+        created_by: { type: 'integer' },
+        updated_by: { type: 'integer' },
         created_at: {
-          type: "string",
-          format: "date-time",
+          type: 'string',
+          format: 'date-time',
         },
         updated_at: {
-          type: "string",
-          format: "date-time",
+          type: 'string',
+          format: 'date-time',
         },
       },
     };

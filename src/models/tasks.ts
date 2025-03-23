@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class Tasks extends Model {
   static get tableName() {
-    return "tasks";
+    return 'tasks';
   }
 
   id!: number;
@@ -25,51 +25,51 @@ class Tasks extends Model {
   static relationMappings = {
     project: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/projects", // path to Projects model
+      modelClass: __dirname + '/projects', // path to Projects model
       join: {
-        from: "tasks.project_id",
-        to: "projects.id",
+        from: 'tasks.project_id',
+        to: 'projects.id',
       },
     },
     assignedBy: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/users", // path to Users model
+      modelClass: __dirname + '/users', // path to Users model
       join: {
-        from: "tasks.assigned_by",
-        to: "users.id",
+        from: 'tasks.assigned_by',
+        to: 'users.id',
       },
     },
     assignedTo: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/users", // path to Users model
+      modelClass: __dirname + '/users', // path to Users model
       join: {
-        from: "tasks.assigned_to",
-        to: "users.id",
+        from: 'tasks.assigned_to',
+        to: 'users.id',
       },
     },
   };
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["name"],
+      type: 'object',
+      required: ['name'],
       properties: {
-        id: { type: "integer" },
-        project_id: { type: "integer" },
-        assigned_by: { type: "integer" },
-        assigned_to: { type: "integer" },
-        name: { type: "string" },
-        description: { type: "string" },
-        is_active: { type: "boolean" },
-        is_completed: { type: "boolean" },
-        status: { type: "string" },
-        estimated_time: { type: "integer" },
-        start_at: { type: "string", format: "date-time" },
-        end_at: { type: "string", format: "date-time" },
-        created_by: { type: "integer" },
-        updated_by: { type: "integer" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        project_id: { type: 'integer' },
+        assigned_by: { type: 'integer' },
+        assigned_to: { type: 'integer' },
+        name: { type: 'string' },
+        description: { type: 'string' },
+        is_active: { type: 'boolean' },
+        is_completed: { type: 'boolean' },
+        status: { type: 'string' },
+        estimated_time: { type: 'integer' },
+        start_at: { type: 'string', format: 'date-time' },
+        end_at: { type: 'string', format: 'date-time' },
+        created_by: { type: 'integer' },
+        updated_by: { type: 'integer' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

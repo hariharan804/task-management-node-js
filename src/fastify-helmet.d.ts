@@ -1,1 +1,1 @@
-declare module "fastify-helmet";
+declare module 'fastify-helmet';

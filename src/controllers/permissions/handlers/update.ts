@@ -1,6 +1,6 @@
-import { handleResponse, responseType } from "@helpers";
-import { FastifyReply, FastifyRequest } from "fastify";
-import Permissions from "models/permissions";
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { handleResponse, responseType } from '@helpers';
+import Permissions from 'models/permissions';
 
 type payload = {
   id: number;
@@ -13,7 +13,7 @@ type payload = {
 
 export async function UPDATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
     const { id, ...rest } = request?.body;
@@ -24,7 +24,7 @@ export async function UPDATE(
     return handleResponse(request, reply, responseType?.OK, {
       data: { id: permission?.id },
     });
-  } catch (error: any) {
+  } catch {
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

@@ -1,6 +1,6 @@
-import { handleResponse, responseType } from "@helpers";
-import { FastifyReply, FastifyRequest } from "fastify";
-import ProjectMembers from "models/projectMembers";
+import { handleResponse, responseType } from '@helpers';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import ProjectMembers from 'models/projectMembers';
 
 type payload = {
   // id?: number;
@@ -15,10 +15,10 @@ type payload = {
 
 export async function CREATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
-    const { ...rest } = request?.body;
+    const { ...rest } = request?.body || {};
     const project = await ProjectMembers.query().insert({
       ...rest,
     });
@@ -27,7 +27,7 @@ export async function CREATE(
       data: { id: project?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error);
+    console.log('🚀 ~ error:', error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

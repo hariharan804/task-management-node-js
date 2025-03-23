@@ -1,8 +1,8 @@
-import { Model } from "objection";
+import { Model } from 'objection';
 
 class RolesPermissionsMapping extends Model {
   static get tableName() {
-    return "roles_permissions_mapping";
+    return 'roles_permissions_mapping';
   }
 
   id!: number;
@@ -16,34 +16,34 @@ class RolesPermissionsMapping extends Model {
   static relationMappings = {
     role: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/role_masters", // path to RoleMasters model
+      modelClass: __dirname + '/role_masters', // path to RoleMasters model
       join: {
-        from: "roles_permissions_mapping.role_id",
-        to: "role_masters.id",
+        from: 'roles_permissions_mapping.role_id',
+        to: 'role_masters.id',
       },
     },
     permission: {
       relation: Model.BelongsToOneRelation,
-      modelClass: __dirname + "/permissions", // path to Permissions model
+      modelClass: __dirname + '/permissions', // path to Permissions model
       join: {
-        from: "roles_permissions_mapping.permission_id",
-        to: "permissions.id",
+        from: 'roles_permissions_mapping.permission_id',
+        to: 'permissions.id',
       },
     },
   };
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["role_id", "permission_id"],
+      type: 'object',
+      required: ['role_id', 'permission_id'],
       properties: {
-        id: { type: "integer" },
-        role_id: { type: "integer" },
-        permission_id: { type: "integer" },
-        created_by: { type: "integer" },
-        updated_by: { type: "integer" },
-        created_at: { type: "string", format: "date-time" },
-        updated_at: { type: "string", format: "date-time" },
+        id: { type: 'integer' },
+        role_id: { type: 'integer' },
+        permission_id: { type: 'integer' },
+        created_by: { type: 'integer' },
+        updated_by: { type: 'integer' },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
       },
     };
   }

@@ -1,6 +1,6 @@
-import { handleResponse, responseType } from "@helpers";
-import { FastifyReply, FastifyRequest } from "fastify";
-import Tasks from "models/tasks";
+import { handleResponse, responseType } from '@helpers';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import Tasks from 'models/tasks';
 
 type payload = {
   // id?: number;
@@ -19,7 +19,7 @@ type payload = {
 
 export async function CREATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply,
+  reply: FastifyReply
 ) {
   try {
     const { ...rest } = request?.body;
@@ -27,12 +27,12 @@ export async function CREATE(
       ...rest,
     });
 
-    console.log("🚀 ~ user ~ user:", task);
+    console.log('🚀 ~ user ~ user:', task);
     return handleResponse(request, reply, responseType?.OK, {
       data: { id: task?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error);
+    console.log('🚀 ~ error:', error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,
