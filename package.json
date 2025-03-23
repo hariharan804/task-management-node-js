@@ -19,6 +19,7 @@
     "delete:db": "node ./src/database/deleteDatabase.js",
     "lint": "eslint --cache . --ext .js,.ts",
     "lint:fix": "eslint --cache . --ext .js,.ts --fix",
+    "prepare": "husky",
     "format": "prettier --write ."
   },
   "lint-staged": {
@@ -40,6 +41,7 @@
     "fastify-plugin": "^4.5.1",
     "firebase": "^11.0.2",
     "fluent-json-schema": "^5.0.0",
+    "husky": "^9.1.7",
     "jsonwebtoken": "^9.0.2",
     "knex": "^2.5.1",
     "node-cron": "^3.0.3",
