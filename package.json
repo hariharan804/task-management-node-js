@@ -16,7 +16,10 @@
     "seed": "npx knex seed:run --knexfile ./src/database/knexfile.ts",
     "seed:prod": "cross-env NODE_ENV=production npx knex seed:run --knexfile ./src/database/knexfile.ts",
     "seed:make": "npx knex seed:make --knexfile ./src/database/knexfile.ts",
-    "delete:db": "node ./src/database/deleteDatabase.js"
+    "delete:db": "node ./src/database/deleteDatabase.js",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@fastify/autoload": "^5.8.3",
@@ -41,7 +44,7 @@
     "tsx": "^4.19.2"
   },
   "devDependencies": {
-    "tiny-glob": "^0.2.9",
+    "@eslint/js": "^9.23.0",
     "@types/async": "^3.2.24",
     "@types/bcryptjs": "^2.4.6",
     "@types/dotenv": "^8.2.0",
@@ -53,14 +56,24 @@
     "dotenv": "^16.4.5",
     "esbuild": "^0.24.0",
     "esbuild-plugin-tsc": "^0.4.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "fastify-cli": "^5.9.0",
     "fastify-tsconfig": "^1.0.1",
+    "globals": "^16.0.0",
     "pino-pretty": "^13.0.0",
-    "typescript": "^5.4.5"
+    "prettier": "^3.5.3",
+    "tiny-glob": "^0.2.9",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.27.0"
   },
   "keywords": [
     "knex"
   ],
   "author": "hariharan",
-  "license": "ISC"
+  "license": "ISC",
+  "eslintIgnore": [
+    "/dist"
+  ]
 }

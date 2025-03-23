@@ -1,5 +1,24 @@
 {
-    "cSpell.words": [
-        "Fastify"
-    ]
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.removeUnusedImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "files.autoSave": "onWindowChange",
+  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
+  "editor.quickSuggestionsDelay": 50,
+  "typescript.suggestionActions.enabled": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "search.actionsPosition": "auto"
 }

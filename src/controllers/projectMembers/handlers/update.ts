@@ -15,7 +15,7 @@ type payload = {
 
 export async function UPDATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
     const { id, ...rest } = request?.body;

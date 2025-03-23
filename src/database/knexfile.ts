@@ -1,11 +1,14 @@
 import { config } from "dotenv";
 import { Knex } from "knex";
 import { resolve } from "path";
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || "development";
 // config({ path: `.env.${env}` });
-console.log("🚀 ~ resolve(__dirname, ", resolve(__dirname, "..", "..",`.env.${env}`))
-config({ path: resolve(__dirname, "..", "..",`.env.${env}`) });
-console.log("🚀 ~ DB env :", `.env.${env}`)
+console.log(
+  "🚀 ~ resolve(__dirname, ",
+  resolve(__dirname, "..", "..", `.env.${env}`),
+);
+config({ path: resolve(__dirname, "..", "..", `.env.${env}`) });
+console.log("🚀 ~ DB env :", `.env.${env}`);
 
 interface IKnexConfig {
   [key: string]: Knex.Config;

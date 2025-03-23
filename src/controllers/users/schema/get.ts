@@ -17,8 +17,8 @@ const getResponse = Schema.object()
         .prop("created_by", Schema.number())
         .prop("updated_by", Schema.number())
         .prop("created_at", Schema.string().format("date-time"))
-        .prop("updated_at", Schema.string().format("date-time"))
-    )
+        .prop("updated_at", Schema.string().format("date-time")),
+    ),
   )
   .prop("overallCount", Schema.number())
   .prop("meta", Schema.object().prop("message", Schema.string()))

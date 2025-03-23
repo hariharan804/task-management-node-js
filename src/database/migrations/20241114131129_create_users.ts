@@ -1,11 +1,15 @@
 import { Knex } from "knex";
 
-
 export async function up(knex: Knex): Promise<void> {
-      // Create "Users" table
+  // Create "Users" table
   await knex.schema.createTable("users", (table) => {
     table.increments("id").primary();
-    table.integer("role_id").unsigned().references("id").inTable("role_masters").onDelete("SET NULL");
+    table
+      .integer("role_id")
+      .unsigned()
+      .references("id")
+      .inTable("role_masters")
+      .onDelete("SET NULL");
     table.string("name", 255).notNullable();
     table.string("firebase_id", 255).notNullable();
     table.string("password", 255).notNullable();
@@ -18,8 +22,6 @@ export async function up(knex: Knex): Promise<void> {
   });
 }
 
-
 export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists("users");
 }
-

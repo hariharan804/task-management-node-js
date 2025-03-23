@@ -12,7 +12,7 @@ async function runEsbuild() {
   console.log(
     "🚀 ~ Starting esbuild in",
     isWatchMode ? "watch" : "build",
-    "mode"
+    "mode",
   );
 
   const buildOptions: BuildOptions = {
@@ -43,17 +43,22 @@ async function runEsbuild() {
 
   let serverProcess;
   let restartTimeout;
-   // Restart the server on changes
+  // Restart the server on changes
   const restartServer = () => {
     clearTimeout(restartTimeout); // Clear any existing timeout
     restartTimeout = setTimeout(() => {
       if (serverProcess) {
         serverProcess.kill(); // Kill the existing process
-        console.log("🏃‍➡️  restarting Server...")
+        console.log("🏃‍➡️  restarting Server...");
       }
-      serverProcess = require('child_process').spawn('node', [`${outdir}/app.js`], {
-        stdio: 'inherit',
-      });
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      serverProcess = require("child_process").spawn(
+        "node",
+        [`${outdir}/app.js`],
+        {
+          stdio: "inherit",
+        },
+      );
     }, 500); // Wait 500ms before restarting to debounce rapid changes
   };
 

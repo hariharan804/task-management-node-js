@@ -20,7 +20,7 @@ type payload = {
 
 export async function SIGNUP(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
     const {
@@ -42,7 +42,7 @@ export async function SIGNUP(
     // Password Hashing
     const hashPassword: string = bcrypt.hashSync(
       password,
-      bcrypt.genSaltSync(4)
+      bcrypt.genSaltSync(4),
     );
 
     const app = initializeApp(firebaseConfig);
@@ -54,7 +54,7 @@ export async function SIGNUP(
       userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
     } catch (error: any) {
       throw new Error(error.message);

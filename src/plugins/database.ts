@@ -15,7 +15,7 @@ const initConnections: FastifyPluginCallback<any> = async (fastify: any) => {
     const config = configs[process.env.NODE_ENV || "development"];
     const db = knex(config);
     // console.log("🚀 ~ constinitConnections:FastifyPluginCallback<any>= ~ db:", await db.raw('SELECT 1'))
-    Model.knex(db)
+    Model.knex(db);
     fastify.decorate("db", db);
   } catch (error) {
     console.error("Plugin Error:", error);

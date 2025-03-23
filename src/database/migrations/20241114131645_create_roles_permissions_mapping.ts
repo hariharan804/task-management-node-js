@@ -1,8 +1,7 @@
 import { Knex } from "knex";
 
-
 export async function up(knex: Knex): Promise<void> {
-      // Create "roles_permissions_mapping" table
+  // Create "roles_permissions_mapping" table
   await knex.schema.createTable("roles_permissions_mapping", (table) => {
     table.increments("id").primary();
     table.integer("role_id").references("id").inTable("role_masters");
@@ -15,8 +14,6 @@ export async function up(knex: Knex): Promise<void> {
   });
 }
 
-
 export async function down(knex: Knex): Promise<void> {
-    await knex.schema.dropTableIfExists("roles_permissions_mapping");
+  await knex.schema.dropTableIfExists("roles_permissions_mapping");
 }
-

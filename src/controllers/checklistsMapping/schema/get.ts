@@ -8,14 +8,14 @@ const getResponse = Schema.object()
     "checklists",
     Schema.array().items(
       Schema.object()
-      .prop("id", Schema.number().required())          
-      .prop("checklist_id", Schema.number().required())      
-      .prop("task_id", Schema.number().required())
-      .prop("created_by", Schema.number())      
-      .prop("updated_by", Schema.number())      
-      .prop("created_at", Schema.string())            
-      .prop("updated_at", Schema.string()) 
-    )
+        .prop("id", Schema.number().required())
+        .prop("checklist_id", Schema.number().required())
+        .prop("task_id", Schema.number().required())
+        .prop("created_by", Schema.number())
+        .prop("updated_by", Schema.number())
+        .prop("created_at", Schema.string())
+        .prop("updated_at", Schema.string()),
+    ),
   )
   .prop("overallCount", Schema.number())
   .prop("meta", Schema.object().prop("message", Schema.string()))

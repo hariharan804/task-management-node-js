@@ -5,7 +5,7 @@ import { fastifySwaggerUi } from "@fastify/swagger-ui";
 
 const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
   fastify: any,
-  options
+  // options
 ) => {
   fastify.register(swagger, {
     swagger: {
@@ -33,7 +33,10 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
     },
     staticCSP: true,
     transformStaticCSP: (header: any) => header,
-    transformSpecification: (swaggerObject: any, request: any, reply: any) => {
+    transformSpecification: (
+      swaggerObject: any,
+      //  request: any, reply: any
+    ) => {
       return swaggerObject;
     },
     transformSpecificationClone: true,

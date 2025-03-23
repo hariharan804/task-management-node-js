@@ -13,7 +13,7 @@ type payload = {
 };
 export async function LOGIN(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
     const { email, password } = request?.body;

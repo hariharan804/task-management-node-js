@@ -1,13 +1,22 @@
 import { Knex } from "knex";
 
-
 export async function up(knex: Knex): Promise<void> {
-      // Create "Tasks" table
+  // Create "Tasks" table
   await knex.schema.createTable("tasks", (table) => {
     table.increments("id").primary();
-    table.integer("project_id").unsigned().references("id").inTable("projects").onDelete("CASCADE");
+    table
+      .integer("project_id")
+      .unsigned()
+      .references("id")
+      .inTable("projects")
+      .onDelete("CASCADE");
     table.integer("assigned_by").unsigned().references("id").inTable("users");
-    table.integer("assigned_to").unsigned().references("id").inTable("users").onDelete("SET NULL");
+    table
+      .integer("assigned_to")
+      .unsigned()
+      .references("id")
+      .inTable("users")
+      .onDelete("SET NULL");
     table.string("name", 255).notNullable();
     table.text("description");
     table.boolean("is_active");
@@ -23,8 +32,6 @@ export async function up(knex: Knex): Promise<void> {
   });
 }
 
-
 export async function down(knex: Knex): Promise<void> {
-    await knex.schema.dropTableIfExists("tasks");
+  await knex.schema.dropTableIfExists("tasks");
 }
-

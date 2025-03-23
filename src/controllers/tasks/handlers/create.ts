@@ -19,22 +19,20 @@ type payload = {
 
 export async function CREATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
-    const {
-    ...rest
-    } = request?.body;
+    const { ...rest } = request?.body;
     const task = await Tasks.query().insert({
-      ...rest
+      ...rest,
     });
-    
-    console.log("🚀 ~ user ~ user:", task)
+
+    console.log("🚀 ~ user ~ user:", task);
     return handleResponse(request, reply, responseType?.OK, {
       data: { id: task?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error)
+    console.log("🚀 ~ error:", error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

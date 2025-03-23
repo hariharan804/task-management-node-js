@@ -8,13 +8,13 @@ const getResponse = Schema.object()
     "notifications",
     Schema.array().items(
       Schema.object()
-      .prop("id", Schema.number().required())          
-      .prop("user_id", Schema.number().required())      
-      .prop("is_read", Schema.boolean())          
-      .prop("message", Schema.string())              
-      .prop("created_at", Schema.string())            
-      .prop("updated_at", Schema.string()) 
-    )
+        .prop("id", Schema.number().required())
+        .prop("user_id", Schema.number().required())
+        .prop("is_read", Schema.boolean())
+        .prop("message", Schema.string())
+        .prop("created_at", Schema.string())
+        .prop("updated_at", Schema.string()),
+    ),
   )
   .prop("overallCount", Schema.number())
   .prop("meta", Schema.object().prop("message", Schema.string()))

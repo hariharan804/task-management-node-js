@@ -15,7 +15,7 @@ type payload = {
 
 export async function CREATE(
   request: FastifyRequest<{ Body: payload }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
     const {
@@ -35,15 +35,15 @@ export async function CREATE(
       is_active,
       role_id,
       updated_by,
-      password:''
+      password: "",
     });
-    
-    console.log("🚀 ~ user ~ user:", user)
+
+    console.log("🚀 ~ user ~ user:", user);
     return handleResponse(request, reply, responseType?.OK, {
       data: { id: user?.id },
     });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error)
+    console.log("🚀 ~ error:", error);
     return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
       error: {
         message: responseType?.INTERNAL_SERVER_ERROR,

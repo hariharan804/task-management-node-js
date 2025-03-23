@@ -6,7 +6,7 @@ const customParams = Schema.object().prop("id", Schema.string());
 const getResponse = Schema.object()
   .prop(
     "task",
-      Schema.object()
+    Schema.object()
       .prop("id", Schema.string())
       .prop("role_id", Schema.number())
       .prop("name", Schema.string())
@@ -16,14 +16,13 @@ const getResponse = Schema.object()
       .prop("created_by", Schema.number())
       .prop("updated_by", Schema.number())
       .prop("created_at", Schema.string().format("date-time"))
-      .prop("updated_at", Schema.string().format("date-time"))
-    )
+      .prop("updated_at", Schema.string().format("date-time")),
+  )
   .prop("meta", Schema.object().prop("message", Schema.string()))
   .valueOf() as JSONSchema;
 
 export const GET_BY_ALL = {
-  description:
-    "This API is used for fetching by id.",
+  description: "This API is used for fetching by id.",
   tags: ["TASK"],
   query: customParams,
   response: makeResponseSchema(getResponse),

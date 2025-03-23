@@ -1,5 +1,5 @@
 // import Fastify from 'fastify';
-// import app, {options} from './app';  
+// import app, {options} from './app';
 
 // import { cpus } from 'os'; // Set the UV_THREADPOOL_SIZE for async operations
 // process.env.UV_THREADPOOL_SIZE = String(cpus().length);

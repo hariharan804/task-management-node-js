@@ -4,4 +4,4 @@ import { GET_BY_ALL } from "./get_by_id";
 import { CREATE } from "./create";
 import { UPDATE } from "./update";
 
-export default { GET_ALL, GET_BY_ALL, DELETE_BY_ALL, CREATE , UPDATE};
+export default { GET_ALL, GET_BY_ALL, DELETE_BY_ALL, CREATE, UPDATE };

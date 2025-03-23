@@ -108,7 +108,7 @@ function handleResponse(
   request: FastifyRequest,
   reply: FastifyReply,
   responseType: responseType,
-  options: Options
+  options: Options,
 ) {
   const statusInfo = httpStatusCodes[responseType];
   if (!statusInfo) {
@@ -142,7 +142,7 @@ function handleResponse(
       ...data,
       meta: {
         message: customMessage,
-        ...statusInfo
+        ...statusInfo,
       },
     });
   }
