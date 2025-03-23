@@ -47,7 +47,6 @@ export default defineConfig({
           'object',
           'type',
         ],
-        // 'newlines-between': 'off',
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
@@ -77,6 +76,10 @@ export default defineConfig({
           },
           {
             pattern: '@routes/**',
+            group: 'internal',
+          },
+          {
+            pattern: '@helpers/**',
             group: 'internal',
           },
         ],
