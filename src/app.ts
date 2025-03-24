@@ -1,9 +1,11 @@
-import { env } from '@config';
+/* eslint-disable import/order */
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import Fastify from 'fastify';
-// import v1 from './routes/v1';
 import { cpus } from 'os';
 import { join } from 'path';
+// import v1 from './routes/v1';
+
+import { env } from './config';
 // Set UV_THREADPOOL_SIZE for async operations
 process.env.UV_THREADPOOL_SIZE = String(cpus().length);
 

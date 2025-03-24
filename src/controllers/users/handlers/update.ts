@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { handleResponse, responseType } from '@helpers';
-import Tasks from 'models/tasks';
+import { handleResponse, responseType } from 'helpers/responseHandler';
+import Users from 'models/users';
 
 type payload = {
   id: number;
@@ -22,8 +22,8 @@ export async function UPDATE(
   reply: FastifyReply
 ) {
   try {
-    const { id, ...rest } = request?.body;
-    const task: any = await Tasks.query()
+    const { id, ...rest } = request?.body || {};
+    const task: any = await Users.query()
       .findById(id)
       .patch({ ...rest });
 

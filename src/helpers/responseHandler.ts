@@ -110,7 +110,7 @@ function handleResponse(
   responseType: responseType,
   options: Options
 ) {
-  const statusInfo = httpStatusCodes[responseType];
+  const statusInfo = httpStatusCodes?.[responseType || 'NOT_IMPLEMENTED'];
   if (!statusInfo) {
     throw new Error(`Invalid response type: ${responseType}`);
   }

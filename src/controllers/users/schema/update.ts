@@ -1,5 +1,5 @@
-import { makeResponseSchema } from '@helpers';
 import Schema, { JSONSchema } from 'fluent-json-schema';
+import { makeResponseSchema } from 'helpers/schema';
 
 // Request body schema
 const requestBody = Schema.object()

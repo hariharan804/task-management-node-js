@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const knex = require('knex');
 
 // const DB_HOST = 'localhost',

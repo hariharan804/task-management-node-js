@@ -87,8 +87,5 @@
     "knex"
   ],
   "author": "hariharan",
-  "license": "ISC",
-  "eslintIgnore": [
-    "/dist"
-  ]
+  "license": "ISC"
 }

@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { handleResponse, responseType } from '@helpers';
+import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
 export async function DELETE_BY_ID(
@@ -7,7 +7,7 @@ export async function DELETE_BY_ID(
   reply: FastifyReply
 ) {
   try {
-    const { id } = request?.params;
+    const { id } = request?.params || {};
     const userID = await Users.query().select('id').where({ id: id }).first();
 
     if (!userID) {

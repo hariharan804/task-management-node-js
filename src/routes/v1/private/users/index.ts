@@ -4,6 +4,7 @@ import { FastifyPluginAsync } from 'fastify';
 
 const customerFeedbacks: FastifyPluginAsync = async (
   fastify,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts
 ): Promise<void> => {
   fastify.get('/', { schema: schema.GET_ALL }, handler.GET_ALL);

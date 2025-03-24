@@ -1,6 +1,8 @@
+/* eslint-disable import/order */
 import { config } from 'dotenv';
 import { Knex } from 'knex';
 import { resolve } from 'path';
+
 const env = process.env.NODE_ENV || 'development';
 // config({ path: `.env.${env}` });
 console.log(
@@ -16,6 +18,8 @@ interface IKnexConfig {
 
 const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD }: any =
   process.env;
+
+const migrationsPath = './migrations';
 
 const configs: IKnexConfig = {
   development: {
@@ -34,7 +38,7 @@ const configs: IKnexConfig = {
     migrations: {
       tableName: 'knex_migrations',
       extension: 'ts',
-      directory: './migrations',
+      directory: migrationsPath,
     },
     seeds: {
       directory: './seeders',
@@ -58,7 +62,7 @@ const configs: IKnexConfig = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: './migrations',
+      directory: migrationsPath,
       extension: '.ts',
     },
     seeds: {
@@ -83,7 +87,7 @@ const configs: IKnexConfig = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: './migrations',
+      directory: migrationsPath,
       extension: '.ts',
     },
     seeds: {

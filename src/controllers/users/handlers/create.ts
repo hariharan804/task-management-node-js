@@ -1,5 +1,5 @@
-import { handleResponse, responseType } from '@helpers';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
 type payload = {
@@ -26,7 +26,7 @@ export async function CREATE(
       is_active,
       role_id,
       updated_by,
-    } = request?.body;
+    } = request?.body || {};
     const user = await Users.query().insert({
       name,
       created_by,

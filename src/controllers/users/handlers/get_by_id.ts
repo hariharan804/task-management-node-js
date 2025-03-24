@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { handleResponse, responseType } from '@helpers';
+import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
 export async function GET_BY_ID(
@@ -8,7 +8,7 @@ export async function GET_BY_ID(
 ) {
   console.log('🚀 ~ GET_BY_ID ~ request:', request?.params?.id);
   try {
-    const { id } = request?.params;
+    const { id } = request?.params || {};
     const user = await Users.query().select().where({ id: id }).first();
 
     if (!user) {

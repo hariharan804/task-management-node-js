@@ -47,42 +47,11 @@ export default defineConfig({
           'object',
           'type',
         ],
+        'newlines-between': 'always',
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
         },
-        pathGroups: [
-          {
-            pattern: 'fastify',
-            group: 'builtin',
-            position: 'before',
-          },
-          {
-            pattern: 'knex',
-            group: 'builtin',
-            position: 'before',
-          },
-          {
-            pattern: '@config/**',
-            group: 'internal',
-          },
-          {
-            pattern: '@services/**',
-            group: 'internal',
-          },
-          {
-            pattern: '@models/**',
-            group: 'internal',
-          },
-          {
-            pattern: '@routes/**',
-            group: 'internal',
-          },
-          {
-            pattern: '@helpers/**',
-            group: 'internal',
-          },
-        ],
         pathGroupsExcludedImportTypes: ['builtin'],
       },
     ],

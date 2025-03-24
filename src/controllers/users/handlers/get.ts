@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { handleResponse, responseType } from '@helpers';
+import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
 export async function GET_ALL(
@@ -7,7 +7,7 @@ export async function GET_ALL(
   reply: FastifyReply
 ) {
   try {
-    const { is_active = true } = request?.query;
+    const { is_active = true } = request?.query || {};
 
     const baseQuery = Users.query().select().where({ is_active: is_active });
 
