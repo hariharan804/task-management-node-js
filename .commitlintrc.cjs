@@ -27,5 +27,10 @@ module.exports = {
         name: 'test: Adding missing tests or correcting existing tests',
       },
     ],
+    messages: {
+      body: false,
+      breaking: false,
+      issues: false,
+    },
   },
 };
