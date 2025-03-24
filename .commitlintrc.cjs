@@ -12,6 +12,7 @@ module.exports = {
   prompt: {
     useEmoji: true,
     markBreakingChangeMode: false,
+    defaultScope: 'root',
     scopes: ['root', ...apps],
     types: [
       { value: 'feat', name: 'feat: A new feature' },
