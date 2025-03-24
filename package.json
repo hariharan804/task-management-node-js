@@ -20,6 +20,8 @@
     "lint": "eslint --cache . --ext .js,.ts",
     "lint:fix": "eslint --cache . --ext .js,.ts --fix",
     "prepare": "husky",
+    "commit": "git add . && lint-staged && czg",
+    "push": "git add . && lint-staged && git add . && czg && git push origin",
     "format": "prettier --write ."
   },
   "lint-staged": {
