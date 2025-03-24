@@ -33,5 +33,7 @@ module.exports = {
       issues: false,
     },
     skipQuestions: ['body', 'breaking', 'issues'],
+    issuePrefixs: false, // Disable issue prompt
+    issueRequired: false, // Ensure it's not mandatory
   },
 };
