@@ -32,5 +32,6 @@ module.exports = {
       breaking: false,
       issues: false,
     },
+    skipQuestions: ['body', 'breaking', 'issues'],
   },
 };
