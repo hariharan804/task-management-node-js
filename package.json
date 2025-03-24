@@ -17,6 +17,7 @@
     "seed:prod": "cross-env NODE_ENV=production npx knex seed:run --knexfile ./src/database/knexfile.ts",
     "seed:make": "npx knex seed:make --knexfile ./src/database/knexfile.ts",
     "delete:db": "node ./src/database/deleteDatabase.js",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint --cache . --ext .js,.ts",
     "lint:fix": "eslint --cache . --ext .js,.ts --fix",
     "prepare": "husky",
@@ -26,7 +27,8 @@
   },
   "lint-staged": {
     "*.{ts,js,jsx,tsx}": [
-      "eslint --cache --fix"
+      "eslint --cache --fix",
+      "prettier --ignore-path .gitignore --write"
     ]
   },
   "dependencies": {
@@ -38,7 +40,6 @@
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^1.10.2",
     "bcryptjs": "^2.4.3",
-    "esbuild-plugin-pino": "^2.2.2",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
     "firebase": "^11.0.2",
@@ -62,8 +63,10 @@
     "@types/node-cron": "^3.0.11",
     "concurrently": "^9.1.0",
     "cross-env": "^7.0.3",
+    "czg": "^1.11.1",
     "dotenv": "^16.4.5",
     "esbuild": "^0.25.0",
+    "esbuild-plugin-pino": "^2.2.2",
     "esbuild-plugin-tsc": "^0.4.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",

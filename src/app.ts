@@ -39,17 +39,19 @@ const app = async (fastify: any, opts: AppOptions) => {
 
 // Initialize Fastify instance
 const fastify = Fastify({
-  logger: {
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        destination: 1,
-        colorize: true,
-        translateTime: 'HH:MM:ss.l',
-        ignore: 'pid,hostname',
-      },
-    },
-  },
+  logger: true,
+
+  // logger: {
+  //   transport: {
+  //     target: 'pino-pretty',
+  //     options: {
+  //       destination: 1,
+  //       colorize: true,
+  //       translateTime: 'HH:MM:ss.l',
+  //       ignore: 'pid,hostname',
+  //     },
+  //   },
+  // },
 });
 
 // Register the app

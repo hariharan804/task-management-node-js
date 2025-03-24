@@ -1,6 +1,6 @@
 import chokidar from 'chokidar'; // For efficient server restarts
 import { context, BuildOptions } from 'esbuild';
-import esbuildPluginPino from 'esbuild-plugin-pino';
+// import esbuildPluginPino from 'esbuild-plugin-pino';
 import glob from 'tiny-glob';
 
 import { env } from './src/config';
@@ -26,6 +26,7 @@ async function runEsbuild() {
     format: 'cjs',
     sourcemap: isWatchMode,
     minify: !isWatchMode,
+    treeShaking: true, // Removes unused code
     external: [
       '@fastify/swagger-ui',
       'better-sqlite3',
@@ -36,8 +37,12 @@ async function runEsbuild() {
       'pg',
       'oracledb',
       'pg-query-stream',
+      'fastify',
     ],
-    plugins: [esbuildPluginPino({ transports: ['pino-pretty'] })],
+    // plugins: [esbuildPluginPino({ transports: ['pino-pretty'] })],
+    // plugins: isWatchMode
+    //   ? [esbuildPluginPino({ transports: ['pino-pretty'] })]
+    //   : [],
   };
 
   const ctx = await context(buildOptions);

@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 

@@ -1,6 +1,6 @@
 import handler from 'controllers/users/handlers';
 import schema from 'controllers/users/schema';
-import { FastifyPluginAsync } from 'fastify';
+import { type FastifyPluginAsync } from 'fastify';
 
 const customerFeedbacks: FastifyPluginAsync = async (
   fastify,
