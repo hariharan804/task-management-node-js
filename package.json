@@ -1,7 +1,7 @@
 {
   "name": "task-management-node-js",
   "version": "1.0.0",
-  "description": "Task management backend",
+  "description": "Task management",
   "main": "app.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx esbuild.ts",
