@@ -29,6 +29,7 @@ async function runEsbuild() {
     treeShaking: true, // Removes unused code
     external: [
       '@fastify/swagger-ui',
+      '@scalar/fastify-api-reference',
       'better-sqlite3',
       'mysql2',
       'mysql',

@@ -9,7 +9,9 @@ console.log(
   '🚀 ~ resolve(__dirname, ',
   resolve(__dirname, '..', '..', `.env.${env}`)
 );
+
 config({ path: resolve(__dirname, '..', '..', `.env.${env}`) });
+
 console.log('🚀 ~ DB env :', `.env.${env}`);
 
 interface IKnexConfig {

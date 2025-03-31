@@ -1,9 +1,14 @@
 /* eslint-disable import/order */
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
+import dotenv from 'dotenv';
 import Fastify from 'fastify';
 import { cpus } from 'os';
 import { join } from 'path';
-// import v1 from './routes/v1';
+
+import { v1Routes } from './routes';
+
+// Load .env file
+dotenv.config();
 
 import { env } from './config';
 // Set UV_THREADPOOL_SIZE for async operations
@@ -24,6 +29,10 @@ const app = async (fastify: any, opts: AppOptions) => {
     options: opts,
   });
 
+  // Basic health check route
+  fastify.get('/', async () => {
+    return { message: 'Server Running....' };
+  });
   // Health check route
   fastify.get('/health', async () => {
     return {
@@ -34,7 +43,7 @@ const app = async (fastify: any, opts: AppOptions) => {
   });
 
   // Register API routes (v1)
-  // await fastify.register(v1);
+  await fastify.register(v1Routes);
 };
 
 // Initialize Fastify instance

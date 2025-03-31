@@ -18,10 +18,13 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
     exposeRoute: true,
   });
   fastify.register(fastifySwaggerUi, {
-    routePrefix: '/swagger',
+    routePrefix: '/docs',
     uiConfig: {
       docExpansion: 'list',
-      deepLinking: false,
+      deepLinking: false, // Disable deep linking
+      displayRequestDuration: true, // Show request duration
+      filter: true, // Enable filtering
+      tryItOutEnabled: true, // Allow users to try API requests
     },
     uiHooks: {
       onRequest: function (request: any, reply: any, next: any) {

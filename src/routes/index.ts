@@ -1,2 +1,1 @@
-// export * from "./v1";
-export {};
+export { default as v1Routes } from './v1';
