@@ -17,7 +17,7 @@ type payload = {
   end_at?: string;
 };
 
-export async function UPDATE(
+export async function userUpdate(
   request: FastifyRequest<{ Body: payload }>,
   reply: FastifyReply
 ) {

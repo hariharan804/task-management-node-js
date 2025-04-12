@@ -1,16 +1,13 @@
-/* eslint-disable import/order */
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import dotenv from 'dotenv';
 import Fastify from 'fastify';
 import { cpus } from 'os';
 import { join } from 'path';
-
 import { v1Routes } from './routes';
-
+import { errorResponse, notFoundResponse } from 'helpers/responseHandler';
+import { SERVER_PORT, NODE_ENV } from './config/env';
 // Load .env file
 dotenv.config();
-
-import { env } from './config';
 // Set UV_THREADPOOL_SIZE for async operations
 process.env.UV_THREADPOOL_SIZE = String(cpus().length);
 
@@ -23,6 +20,16 @@ const options: AppOptions = {};
 
 // Fastify plugin definition
 const app = async (fastify: any, opts: AppOptions) => {
+  // Global error handler
+  fastify.setErrorHandler(errorResponse);
+  fastify.setNotFoundHandler(notFoundResponse);
+  // fastify.setSchemaErrorFormatter(function (errors: any, dataVar: any) {
+  //   console.log('🚀 ~ dataVar:', dataVar);
+  //   console.log('🚀 ~ errors:', errors);
+  //   // ... my formatting logic
+  //   return new Error('myErrorMessage');
+  // });
+
   // Register plugins from the "plugins" directory
   await fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
@@ -43,13 +50,14 @@ const app = async (fastify: any, opts: AppOptions) => {
   });
 
   // Register API routes (v1)
-  await fastify.register(v1Routes);
+  await fastify.register(v1Routes, { prefix: '/api/v1' });
 };
 
 // Initialize Fastify instance
 const fastify = Fastify({
-  logger: true,
-
+  logger: {
+    level: 'error', // Only logs error-level logs
+  },
   // logger: {
   //   transport: {
   //     target: 'pino-pretty',
@@ -71,16 +79,14 @@ const startServer = async () => {
   // const PORT = process.env.SERVER_PORT;  // Changed to 8080
   try {
     const address = await fastify.listen({
-      port: Number(env.SERVER_PORT),
+      port: Number(SERVER_PORT),
       host: '0.0.0.0',
     });
-    console.log(
-      `Server listening at ${address} Environment: ${env.NODE_ENV} 🔥`
-    );
+    console.log(`Server listening at ${address} Environment: ${NODE_ENV} 🔥`);
   } catch (err: any) {
     if (err?.code === 'EADDRINUSE') {
       console.log(
-        `Port ${env.SERVER_PORT} is already in use, please try again later`
+        `Port ${SERVER_PORT} is already in use, please try again later`
       );
     } else {
       console.error(err);

@@ -24,7 +24,7 @@ const getResponse = Schema.object()
   .prop('meta', Schema.object().prop('message', Schema.string()))
   .valueOf() as JSONSchema;
 
-export const GET_ALL = {
+export const userGetAllSchema = {
   description: 'This API is used for fetching all Users.',
   tags: ['USERS'],
   query: params,

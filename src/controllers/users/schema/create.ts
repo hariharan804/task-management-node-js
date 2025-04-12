@@ -1,27 +1,26 @@
-import Schema, { JSONSchema } from 'fluent-json-schema';
+import S from 'fluent-json-schema';
 import { makeResponseSchema } from 'helpers/schema';
 
-// Request body schema
-const requestBody = Schema.object()
-  .prop('role_id', Schema.number().required())
-  .prop('name', Schema.string().required())
-  .prop('firebase_id', Schema.string().required())
-  .prop('email', Schema.string().required())
-  .prop('is_active', Schema.boolean())
-  .prop('created_by', Schema.number())
-  .prop('updated_by', Schema.number())
-  .valueOf() as JSONSchema;
+// Common properties
+const metaSchema = S.object().prop('message', S.string());
 
-// Updated response schema with all properties from `props`
-const responseBody = Schema.object()
-  .prop('id', Schema.number())
-  .prop('meta', Schema.object().prop('message', Schema.string()))
-  .valueOf() as JSONSchema;
+// Request body schema
+const requestBody = S.object()
+  .prop('role_id', S.number().required())
+  .prop('name', S.string().required())
+  .prop('firebase_id', S.string().required())
+  .prop('email', S.string().required())
+  .prop('is_active', S.boolean())
+  .prop('created_by', S.number())
+  .prop('updated_by', S.number());
+
+// Response schema
+const responseBody = S.object().prop('id', S.number()).prop('meta', metaSchema);
 
 // POST route schema
-export const CREATE = {
+export const userCreateSchema = {
   description: 'This API is used for adding a new user record.',
   tags: ['USERS'],
-  body: requestBody, // Request body schema for POST
-  response: makeResponseSchema(responseBody), // Updated response schema
+  body: S.object().prop('id', S.string()), // Request body schema for POST
+  response: makeResponseSchema(responseBody), // Optimized response schema
 };

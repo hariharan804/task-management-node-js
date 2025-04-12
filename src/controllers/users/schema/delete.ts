@@ -8,7 +8,7 @@ const getResponse = Schema.object()
   .prop('meta', Schema.object().prop('message', Schema.string()))
   .valueOf() as JSONSchema;
 
-export const DELETE_BY_ALL = {
+export const userDeleteSchema = {
   description: 'This API is used for deleting tag by id.',
   tags: ['USERS'],
   query: customParams,

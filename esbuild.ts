@@ -3,11 +3,11 @@ import { context, BuildOptions } from 'esbuild';
 // import esbuildPluginPino from 'esbuild-plugin-pino';
 import glob from 'tiny-glob';
 
-import { env } from './src/config';
+import { NODE_ENV } from './src/config/env';
 
 async function runEsbuild() {
   const entryPoints = await glob('src/**/*.ts');
-  const isWatchMode = env.NODE_ENV !== 'production';
+  const isWatchMode = NODE_ENV !== 'production';
   const outdir = 'dist';
 
   console.log(

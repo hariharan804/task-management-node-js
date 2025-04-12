@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
-export async function GET_ALL(
+export async function userGetAll(
   request: FastifyRequest<{ Querystring: { is_active?: boolean } }>,
   reply: FastifyReply
 ) {

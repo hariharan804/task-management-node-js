@@ -15,11 +15,10 @@ const requestBody = Schema.object()
 // Updated response schema with all properties from `props`
 const responseBody = Schema.object()
   .prop('id', Schema.number())
-  .prop('meta', Schema.object().prop('message', Schema.string()))
-  .valueOf() as JSONSchema;
+  .prop('meta', Schema.object().prop('message', Schema.string()));
 
 // POST route schema
-export const UPDATE = {
+export const userUpdateSchema = {
   description: 'This API is used for adding a update record.',
   tags: ['USERS'],
   body: requestBody, // Request body schema for POST

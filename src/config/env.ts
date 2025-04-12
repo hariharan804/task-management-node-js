@@ -12,9 +12,10 @@ const {
   DB_DIALECT,
   NODE_ENV,
   SERVER_PORT,
+  IS_DEVELOPMENT,
 }: any = process.env;
 
-export default {
+export {
   DB_NAME,
   DB_USERNAME,
   DB_PASSWORD,
@@ -23,4 +24,5 @@ export default {
   DB_DIALECT,
   NODE_ENV,
   SERVER_PORT,
+  IS_DEVELOPMENT,
 };

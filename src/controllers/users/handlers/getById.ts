@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
-export async function GET_BY_ID(
+export async function userGetById(
   request: FastifyRequest<{ Params: { id: string | number } }>,
   reply: FastifyReply
 ) {

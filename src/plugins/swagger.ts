@@ -21,7 +21,7 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
     routePrefix: '/docs',
     uiConfig: {
       docExpansion: 'list',
-      deepLinking: false, // Disable deep linking
+      deepLinking: true, // Disable deep linking
       displayRequestDuration: true, // Show request duration
       filter: true, // Enable filtering
       tryItOutEnabled: true, // Allow users to try API requests

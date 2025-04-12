@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
-export async function DELETE_BY_ID(
+export async function userDelete(
   request: FastifyRequest<{ Params: { id: string } }>,
   reply: FastifyReply
 ) {

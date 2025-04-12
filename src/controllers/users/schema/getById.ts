@@ -1,4 +1,4 @@
-import Schema, { JSONSchema } from 'fluent-json-schema';
+import Schema from 'fluent-json-schema';
 import { makeResponseSchema } from 'helpers/schema';
 
 const customParams = Schema.object().prop('id', Schema.string());
@@ -17,10 +17,9 @@ const getResponse = Schema.object()
       .prop('created_at', Schema.string().format('date-time'))
       .prop('updated_at', Schema.string().format('date-time'))
   )
-  .prop('meta', Schema.object().prop('message', Schema.string()))
-  .valueOf() as JSONSchema;
+  .prop('meta', Schema.object().prop('message', Schema.string()));
 
-export const GET_BY_ALL = {
+export const userGetByIdSchema = {
   description: 'This API is used for fetching Tag by id.',
   tags: ['USERS'],
   query: customParams,

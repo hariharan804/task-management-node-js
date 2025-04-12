@@ -2,8 +2,7 @@ import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import Users from 'models/users';
 
-type payload = {
-  // id?: number;
+type Payload = {
   role_id?: number;
   name?: string;
   firebase_id?: string;
@@ -13,8 +12,8 @@ type payload = {
   updated_by?: number;
 };
 
-export async function CREATE(
-  request: FastifyRequest<{ Body: payload }>,
+export async function userCreate(
+  request: FastifyRequest<{ Body: Payload }>,
   reply: FastifyReply
 ) {
   try {
@@ -26,28 +25,27 @@ export async function CREATE(
       is_active,
       role_id,
       updated_by,
-    } = request?.body || {};
-    const user = await Users.query().insert({
+    } = request.body;
+
+    const user = await Users.query().insertAndFetch({
       name,
       created_by,
       email,
       firebase_id,
-      is_active,
+      is_active: is_active ?? true, // Default to `true` if undefined
       role_id,
       updated_by,
-      password: '',
+      password: '', // Consider hashing if needed
     });
 
-    console.log('🚀 ~ user ~ user:', user);
-    return handleResponse(request, reply, responseType?.OK, {
-      data: { id: user?.id },
+    console.debug('🚀 ~ User Created:', user);
+
+    return handleResponse(request, reply, responseType.OK, {
+      data: { id: user.id },
     });
   } catch (error: any) {
-    console.log('🚀 ~ error:', error);
-    return handleResponse(request, reply, responseType?.INTERNAL_SERVER_ERROR, {
-      error: {
-        message: responseType?.INTERNAL_SERVER_ERROR,
-      },
+    return handleResponse(request, reply, responseType.INTERNAL_SERVER_ERROR, {
+      error,
     });
   }
 }

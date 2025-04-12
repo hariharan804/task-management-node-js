@@ -1,1 +1,1 @@
-export { default as v1Routes } from './v1';
+export * from './v1';
