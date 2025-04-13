@@ -5,6 +5,10 @@ export class BaseModel extends Model {
   created_at?: string;
   updated_at?: string;
 
+  static get idColumn() {
+    return 'id'; // Default primary key column
+  }
+
   $beforeInsert() {
     this.created_at = new Date().toISOString();
     this.updated_at = new Date().toISOString();

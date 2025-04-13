@@ -9,14 +9,6 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
 ) => {
   fastify.register(swagger, {
     swagger: {
-      theme: {
-        title: 'Task Management API',
-        favicon: '/public/favicon.ico',
-        logo: {
-          url: '/public/logo.png',
-          altText: 'Logo',
-        },
-      },
       info: {
         title: 'Task Management Backend',
         description: 'API documentation',
@@ -39,14 +31,36 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
   });
   fastify.register(fastifySwaggerUi, {
     routePrefix: '/docs',
-    css: '/public/swagger-ui2.css', // Link to your custom CSS file
-    transformStaticHtml: (html: any) => {
-      console.log('🚀 ~ html:', html);
-      return html.replace(
-        '</head>',
-        '<link rel="stylesheet" type="text/css" href="/public/swagger-ui2.css"></head>'
-      );
-    },
+
+    // transformStaticHtml: (html: any) => {
+    //   console.log('🚀 ~ html:', html);
+    //   return html.replace(
+    //     '</head>',
+    //     '<link rel="stylesheet" type="text/css" href="/public/swagger-ui2.css"></head>'
+    //   );
+    // },
+
+    // logo: {
+    //   type: 'image/png',
+    //   content: '/docs/logo.png',
+    // },
+    // theme: {
+    //   favicon: [
+    //     {
+    //       filename: 'favicon-16x16.png',
+    //       rel: 'icon',
+    //       sizes: '16x16',
+    //       type: 'image/png',
+    //       content: '/docs/favicon-16x16.png',
+    //     },
+    //   ],
+    //   css: [
+    //     {
+    //       filename: 'swagger-ui2.css',
+    //       content: '/docs/static/theme/swagger-ui2.css',
+    //     },
+    //   ], // Link to your custom CSS file
+    // },
     uiConfig: {
       docExpansion: 'none', // Collapse all endpoints by default ('none' | 'list' | 'full')
       deepLinking: true, // Allows bookmarking/tagging endpoints via URL

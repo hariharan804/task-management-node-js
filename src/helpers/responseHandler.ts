@@ -1,5 +1,6 @@
 import { IS_DEVELOPMENT } from 'config/env';
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
+import { snakeToCamel } from './functions';
 
 interface Options {
   data?: any;
@@ -160,7 +161,7 @@ export function handleResponse(
           },
         }
       : {
-          data: data,
+          data: snakeToCamel(data),
           meta: {
             ...statusInfo,
             message: customMessage || statusInfo?.message,

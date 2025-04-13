@@ -1,4 +1,3 @@
-import { snakeToCamel } from 'helpers/functions';
 import { pagination } from './pagination';
 interface GetServicePayload {
   list: Array<object>;
@@ -41,5 +40,5 @@ export function paginationResponse(
     ...rest,
   };
 
-  return snakeToCamel(response);
+  return response;
 }

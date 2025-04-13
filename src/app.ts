@@ -6,7 +6,6 @@ import { join } from 'path';
 import { v1Routes } from './routes';
 import { errorResponse, notFoundResponse } from 'helpers/responseHandler';
 import { SERVER_PORT, NODE_ENV } from './config/env';
-import fastifyStatic from '@fastify/static';
 // Load .env file
 dotenv.config();
 // Set UV_THREADPOOL_SIZE for async operations
@@ -52,10 +51,6 @@ const app = async (fastify: any, opts: AppOptions) => {
     options: opts,
   });
 
-  await fastify.register(fastifyStatic, {
-    root: join(__dirname, '..', 'public'),
-    prefix: '/public/', // directly at root
-  });
   // Basic health check route
   fastify.get('/', async () => {
     return { message: 'Server Running....' };

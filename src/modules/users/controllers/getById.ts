@@ -19,7 +19,7 @@ export class UserGetByIdHandler {
       user
     );
     return handleResponse(request, reply, responseType.OK, {
-      data: { ...user, email: '' },
+      data: { ...user, role_id: [{ role_id: '' }] },
     });
   });
 
@@ -32,7 +32,14 @@ export class UserGetByIdHandler {
       response: makeResponseSchema(
         S.object()
           .prop('id', S.string())
-          .prop('role_id', S.number())
+          .prop(
+            'roleId',
+            S.anyOf([
+              S.array(), // array of anything
+              S.object(), // object with any structure
+              S.number(), // number
+            ])
+          )
           .prop('name', S.string())
           .prop('firebase_id', S.string())
           .prop('email', S.string())
