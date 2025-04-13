@@ -1,10 +1,10 @@
 import { snakeToCamel } from 'helpers/functions';
 import { pagination } from './pagination';
 interface GetServicePayload {
-  list: Array<object>; // renamed from `page` to `data`
+  list: Array<object>;
   count: number;
   totalCount: number;
-  page: number; // renamed from offset to page
+  page: number;
   limit: number;
 }
 

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 const ACCESS_TOKEN_SECRET =
   process.env.ACCESS_TOKEN_SECRET || 'tasks-access-token-secretAQWER%$$3456';
 

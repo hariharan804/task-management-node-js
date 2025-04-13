@@ -1,11 +1,11 @@
 import { Model } from 'objection';
+import { BaseModel } from './baseModel';
 
-class Users extends Model {
+export class Users extends BaseModel {
   static get tableName() {
     return 'users';
   }
 
-  id!: number;
   role_id!: number;
   name!: string;
   firebase_id!: string;
@@ -14,8 +14,6 @@ class Users extends Model {
   is_active!: boolean;
   created_by!: number;
   updated_by!: number;
-  created_at!: string;
-  updated_at!: string;
 
   static relationMappings = {
     roleData: {
@@ -41,7 +39,7 @@ class Users extends Model {
       type: 'object',
       required: ['name', 'firebase_id', 'password', 'email'],
       properties: {
-        id: { type: 'integer' },
+        id: { type: 'string' },
         role_id: { type: 'integer' },
         name: { type: 'string' },
         firebase_id: { type: 'string' },
@@ -61,16 +59,4 @@ class Users extends Model {
       },
     };
   }
-
-  $beforeInsert() {
-    const now = new Date();
-    this.created_at = now.toISOString();
-    this.updated_at = this.created_at;
-  }
-
-  $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
-  }
 }
-
-export default Users;

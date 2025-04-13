@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
-import Users from 'models/users';
+import { Users } from 'models/users';
 
 export async function userGetById(
   request: FastifyRequest<{ Params: { id: string | number } }>,

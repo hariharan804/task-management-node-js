@@ -1,6 +1,6 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { handleResponse, responseType } from 'helpers/responseHandler';
-import Users from 'models/users';
+import { Users } from 'models/users';
 
 type Payload = {
   role_id?: number;

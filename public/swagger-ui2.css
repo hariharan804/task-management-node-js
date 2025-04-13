@@ -1,0 +1,18 @@
+/* Example custom styling for Swagger UI */
+.swagger-ui .topbar {
+  background-color: #4caf50 !important; /* Green background */
+}
+
+.swagger-ui .info {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.swagger-ui .info .title {
+  color: #333;
+  font-size: 1.5em;
+}
+
+.swagger-ui .swagger-ui .auth-wrapper {
+  display: none; /* Hides the authentication button */
+}

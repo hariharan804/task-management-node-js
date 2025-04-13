@@ -6,6 +6,7 @@ import { join } from 'path';
 import { v1Routes } from './routes';
 import { errorResponse, notFoundResponse } from 'helpers/responseHandler';
 import { SERVER_PORT, NODE_ENV } from './config/env';
+import fastifyStatic from '@fastify/static';
 // Load .env file
 dotenv.config();
 // Set UV_THREADPOOL_SIZE for async operations
@@ -21,21 +22,40 @@ const options: AppOptions = {};
 // Fastify plugin definition
 const app = async (fastify: any, opts: AppOptions) => {
   // Global error handler
+  fastify.setSchemaErrorFormatter((errors: any[], dataVar: any) => {
+    const message = errors
+      .map(
+        (err: {
+          instancePath: any;
+          dataPath: any;
+          params: { missingProperty: any };
+          message: any;
+        }) => {
+          const field =
+            err.instancePath ||
+            err.dataPath ||
+            err.params.missingProperty ||
+            '';
+          return `${field} ${err.message}`;
+        }
+      )
+      .join(', ');
+    console.log('🚀 ~ fastify.setSchemaErrorFormatter ~ message:', message);
+
+    return new Error(`Validation failed: ${message} ${dataVar}`);
+  });
   fastify.setErrorHandler(errorResponse);
   fastify.setNotFoundHandler(notFoundResponse);
-  // fastify.setSchemaErrorFormatter(function (errors: any, dataVar: any) {
-  //   console.log('🚀 ~ dataVar:', dataVar);
-  //   console.log('🚀 ~ errors:', errors);
-  //   // ... my formatting logic
-  //   return new Error('myErrorMessage');
-  // });
-
   // Register plugins from the "plugins" directory
   await fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts,
   });
 
+  await fastify.register(fastifyStatic, {
+    root: join(__dirname, '..', 'public'),
+    prefix: '/public/', // directly at root
+  });
   // Basic health check route
   fastify.get('/', async () => {
     return { message: 'Server Running....' };

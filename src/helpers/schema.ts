@@ -22,7 +22,10 @@ const buildErrorSchema = (description: string): JSONSchema =>
 
 export const makeResponseSchema = (successResponse: ObjectSchema) => {
   return {
-    '200': successResponse.prop('meta', metaSchema).valueOf(),
+    '200': S.object()
+      .prop('data', successResponse)
+      .prop('meta', metaSchema)
+      .valueOf(),
     '400': buildErrorSchema('Bad Request'),
     '401': buildErrorSchema('Unauthorized Response'),
     '404': buildErrorSchema('Not Found'),

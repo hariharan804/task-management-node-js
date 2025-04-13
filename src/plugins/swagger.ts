@@ -9,22 +9,61 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
 ) => {
   fastify.register(swagger, {
     swagger: {
+      theme: {
+        title: 'Task Management API',
+        favicon: '/public/favicon.ico',
+        logo: {
+          url: '/public/logo.png',
+          altText: 'Logo',
+        },
+      },
       info: {
         title: 'Task Management Backend',
         description: 'API documentation',
         version: '0.0.1',
       },
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      securityDefinitions: {
+        bearerAuth: {
+          type: 'apiKey',
+          name: 'Authorization',
+          in: 'header',
+          scheme: 'bearer',
+          description: 'Enter token like: Bearer &lt;token>',
+        },
+      },
+      security: [{ bearerAuth: [] }],
     },
     exposeRoute: true,
   });
   fastify.register(fastifySwaggerUi, {
     routePrefix: '/docs',
+    css: '/public/swagger-ui2.css', // Link to your custom CSS file
+    transformStaticHtml: (html: any) => {
+      console.log('🚀 ~ html:', html);
+      return html.replace(
+        '</head>',
+        '<link rel="stylesheet" type="text/css" href="/public/swagger-ui2.css"></head>'
+      );
+    },
     uiConfig: {
-      docExpansion: 'list',
-      deepLinking: true, // Disable deep linking
-      displayRequestDuration: true, // Show request duration
-      filter: true, // Enable filtering
-      tryItOutEnabled: true, // Allow users to try API requests
+      docExpansion: 'none', // Collapse all endpoints by default ('none' | 'list' | 'full')
+      deepLinking: true, // Allows bookmarking/tagging endpoints via URL
+      // displayOperationId: true, // Show the operationId in each operation
+      displayRequestDuration: true, // Show how long requests take
+      filter: true, // Enable search filter for paths/tags
+      showExtensions: true, // Show extensions (x-*) if defined in your OpenAPI spec
+      showCommonExtensions: true, // Show common extensions (like x-codeSamples)
+      tryItOutEnabled: true, // Enable "Try it out" by default
+      persistAuthorization: true, // Retain auth token across page reloads
+      showMutatedRequest: true, // Show user-edited request in Try It Out
+      // defaultModelsExpandDepth: -1, // Set to -1 to hide schema/model section
+      // defaultModelExpandDepth: 1, // Controls how deep models expand (1 = first level only)
+      syntaxHighlight: {
+        theme: 'agate', // Swagger UI built-in themes: 'monokai', 'agate', etc.
+        activated: true,
+      },
     },
     uiHooks: {
       onRequest: function (request: any, reply: any, next: any) {
@@ -42,7 +81,7 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
     ) => {
       return swaggerObject;
     },
-    transformSpecificationClone: true,
+    // transformSpecificationClone: true,
   });
 };
 

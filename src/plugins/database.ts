@@ -1,26 +1,21 @@
-import { FastifyPluginCallback } from 'fastify';
-import fp from 'fastify-plugin';
-import knex, { Knex } from 'knex';
-import { Model } from 'objection';
-
-import configs from '../database/knexfile';
-
 declare module 'fastify' {
   interface FastifyInstance {
-    db: Knex;
+    knex: Knex;
   }
 }
 
-const initConnections: FastifyPluginCallback<any> = async (fastify: any) => {
-  try {
-    const config = configs[process.env.NODE_ENV || 'development'];
-    const db = knex(config);
-    // console.log("🚀 ~ constinitConnections:FastifyPluginCallback<any>= ~ db:", await db.raw('SELECT 1'))
-    Model.knex(db);
-    fastify.decorate('db', db);
-  } catch (error) {
-    console.error('Plugin Error:', error);
-  }
-};
+import { db } from 'database';
+import fp from 'fastify-plugin';
+import { Knex } from 'knex';
 
-export default fp(initConnections);
+async function dbConnector(fastify: any) {
+  try {
+    await db.raw('select 1+1 as result');
+    console.log('✅ Database connection established successfully!');
+    fastify.decorate('knex', db);
+  } catch (err) {
+    console.log('🚀 ~ dbConnector ~ err:', err);
+  }
+}
+
+export default fp(dbConnector);

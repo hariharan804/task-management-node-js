@@ -39,6 +39,11 @@ async function runEsbuild() {
       'oracledb',
       'pg-query-stream',
       'fastify',
+      'objection',
+      'knex',
+      'pino',
+      'pino-pretty',
+      'dotenv',
     ],
     // plugins: [esbuildPluginPino({ transports: ['pino-pretty'] })],
     // plugins: isWatchMode

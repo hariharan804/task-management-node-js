@@ -160,7 +160,7 @@ export function handleResponse(
           },
         }
       : {
-          ...data,
+          data: data,
           meta: {
             ...statusInfo,
             message: customMessage || statusInfo?.message,
@@ -181,8 +181,8 @@ export function errorResponse(
   reply: FastifyReply
 ) {
   const statusCode = error.statusCode || 500;
-  console.log('🚀 ~ error.validation:', error.message);
-  console.log('🚀 ~ IS_DEVELOPMENT :', IS_DEVELOPMENT);
+  console.log('🚀 ~ error:', error.message);
+  console.log('🚀 ~ error validation :', request.validationError);
 
   if (error.validation) {
     return handleResponse(request, reply, responseType.NOT_ACCEPTABLE, {
