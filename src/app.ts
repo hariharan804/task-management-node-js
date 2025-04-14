@@ -6,11 +6,12 @@ import { join } from 'path';
 import { v1Routes } from './routes';
 import { errorResponse, notFoundResponse } from 'helpers/responseHandler';
 import { SERVER_PORT, NODE_ENV } from './config/env';
+import fastifyCompress from '@fastify/compress';
 // Load .env file
 dotenv.config();
 // Set UV_THREADPOOL_SIZE for async operations
 process.env.UV_THREADPOOL_SIZE = String(cpus().length);
-
+// autocannon http://localhost:6001/api/v1/users/123
 // Define AppOptions type, extend it with AutoloadPluginOptions
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -46,6 +47,7 @@ const app = async (fastify: any, opts: AppOptions) => {
   fastify.setErrorHandler(errorResponse);
   fastify.setNotFoundHandler(notFoundResponse);
   // Register plugins from the "plugins" directory
+  fastify.register(fastifyCompress);
   await fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts,

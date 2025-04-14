@@ -1,6 +1,5 @@
 import { IS_DEVELOPMENT } from 'config/env';
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
-import { snakeToCamel } from './functions';
 
 interface Options {
   data?: any;
@@ -18,6 +17,7 @@ export enum responseType {
   UNAUTHORIZED = 'UNAUTHORIZED',
   FORBIDDEN = 'FORBIDDEN',
   NOT_ACCEPTABLE = 'NOT_ACCEPTABLE',
+  RATE_LIMIT = 'RATE_LIMIT',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
   NOT_IMPLEMENTED = 'NOT_IMPLEMENTED',
   BAD_GATEWAY = 'BAD_GATEWAY',
@@ -97,6 +97,12 @@ const httpStatusCodes: Record<
     description:
       'The request could not be completed due to a conflict with the current state of the target resource.',
   },
+  RATE_LIMIT: {
+    code: 429,
+    message: 'Rate limit exceeded.',
+    description:
+      'The user has exceeded the rate limit for the requested resource.',
+  },
   INTERNAL_SERVER_ERROR: {
     code: 500,
     message: 'Something went wrong.',
@@ -161,7 +167,7 @@ export function handleResponse(
           },
         }
       : {
-          data: snakeToCamel(data),
+          data: data,
           meta: {
             ...statusInfo,
             message: customMessage || statusInfo?.message,
@@ -183,7 +189,13 @@ export function errorResponse(
 ) {
   const statusCode = error.statusCode || 500;
   console.log('🚀 ~ error:', error.message);
-  console.log('🚀 ~ error validation :', request.validationError);
+  console.log('🚀 ~ error validation :', error);
+
+  if (error.statusCode === 429) {
+    return handleResponse(request, reply, responseType.RATE_LIMIT, {
+      customMessage: error?.message,
+    });
+  }
 
   if (error.validation) {
     return handleResponse(request, reply, responseType.NOT_ACCEPTABLE, {

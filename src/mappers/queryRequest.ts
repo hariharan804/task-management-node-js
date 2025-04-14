@@ -3,7 +3,7 @@
  */
 interface RequestParameters {
   id: string;
-  offset: number;
+  page: number;
   limit: number;
   search?: string;
   rest?: { [key: string]: string | number };
@@ -18,21 +18,20 @@ interface RequestParameters {
  */
 export function queryRequestInfo(request: any): RequestParameters {
   const {
-    query: { id, offset = 0, limit = 10, search, ...rest },
+    query: { id, page = 1, limit = 10, search, ...rest },
   } = request as {
     query: {
       id: string;
-      offset: string;
+      page: string;
       limit: string;
       search: string;
       rest: { [key: string]: string | number };
     };
-    url: string;
   };
 
   return {
     id,
-    offset: Number(offset || 0),
+    page: Number(page || 1),
     limit: Number(limit || 10),
     search,
     ...rest,

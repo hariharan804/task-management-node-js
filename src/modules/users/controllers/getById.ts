@@ -4,7 +4,7 @@ import S from 'fluent-json-schema';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import { withTryCatch } from 'helpers/withTryCatch';
 import { paramsRequestInfo } from 'mappers/paramsRequest';
-import { Users } from 'models/users';
+import { TableName } from 'models/tableName';
 
 export class UserGetByIdHandler {
   static handle: (
@@ -12,14 +12,15 @@ export class UserGetByIdHandler {
     reply: FastifyReply
   ) => Promise<void> = withTryCatch(async (request, reply) => {
     const { id } = paramsRequestInfo(request);
-    const user = await Users.query().select().where({ id: id }).first();
+    // const user = await Users.query().select().where({ id: id }).first();
+    const data = await TableName.query().select();
 
-    console.log(
-      '🚀 ~ UserGetByIdHandler ~ )=>Promise<void>=withTryCatch ~ user:',
-      user
-    );
+    // console.log(
+    //   '🚀 ~ UserGetByIdHandler ~ )=>Promise<void>=withTryCatch ~ user:',
+    //   user
+    // );
     return handleResponse(request, reply, responseType.OK, {
-      data: { ...user, role_id: [{ role_id: '' }] },
+      data: { role_id: [{ role_id: data }] },
     });
   });
 

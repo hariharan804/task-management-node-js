@@ -19,79 +19,57 @@ const {
   DB_DEBUG,
 } = process.env;
 
+const migrations = {
+  tableName: 'knex_migrations',
+  extension: 'mjs',
+  directory: './migrations',
+  loadExtensions: ['.mjs'],
+};
+
+const seeds = {
+  extension: 'mjs',
+  directory: './seeders',
+  loadExtensions: ['.mjs'],
+};
+
+const pool = { min: 2, max: 10, idleTimeoutMillis: 10000 };
+
+const connection = {
+  host: DB_HOST,
+  port: Number(DB_PORT),
+  database: DB_NAME,
+  user: DB_USERNAME,
+  password: DB_PASSWORD,
+};
+
 // Knex configuration map
 const configs = {
   development: {
     client: 'postgresql',
-    connection: {
-      host: DB_HOST,
-      port: Number(DB_PORT),
-      database: DB_NAME,
-      user: DB_USERNAME,
-      password: DB_PASSWORD,
-    },
-    pool: { min: 2, max: 10 },
-    migrations: {
-      tableName: 'knex_migrations',
-      extension: 'mjs',
-      directory: './migrations',
-      loadExtensions: ['.mjs'],
-    },
-    seeds: {
-      extension: 'mjs',
-      directory: './seeders',
-      loadExtensions: ['.mjs'],
-    },
+    connection: connection,
+    pool: pool,
+    migrations: migrations,
+    seeds: seeds,
     debug: DB_DEBUG === 'true',
     useNullAsDefault: true,
   },
 
   staging: {
     client: 'postgresql',
-    connection: {
-      host: DB_HOST,
-      port: Number(DB_PORT),
-      database: DB_NAME,
-      user: DB_USERNAME,
-      password: DB_PASSWORD,
-    },
-    pool: { min: 2, max: 10 },
-    migrations: {
-      tableName: 'knex_migrations',
-      extension: 'mjs',
-      directory: './migrations',
-      loadExtensions: ['.mjs'],
-    },
-    seeds: {
-      extension: 'mjs',
-      directory: './seeders',
-      loadExtensions: ['.mjs'],
-    },
+    connection: connection,
+    pool: pool,
+    migrations: migrations,
+    seeds: seeds,
     debug: DB_DEBUG === 'true',
     useNullAsDefault: true,
   },
 
   production: {
     client: 'postgresql',
-    connection: {
-      host: DB_HOST,
-      port: Number(DB_PORT),
-      database: DB_NAME,
-      user: DB_USERNAME,
-      password: DB_PASSWORD,
-    },
-    pool: { min: 2, max: 10 },
-    migrations: {
-      tableName: 'knex_migrations',
-      extension: 'mjs',
-      directory: './migrations',
-      loadExtensions: ['.mjs'],
-    },
-    seeds: {
-      extension: 'mjs',
-      directory: './seeders',
-      loadExtensions: ['.mjs'],
-    },
+    connection: connection,
+    pool: pool,
+    migrations: migrations,
+    seeds: seeds,
     useNullAsDefault: true,
   },
 };
