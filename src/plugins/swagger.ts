@@ -2,12 +2,25 @@ import swagger, { SwaggerOptions } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { FastifyPluginCallback } from 'fastify';
 import fp from 'fastify-plugin';
+import { Users } from 'models/users';
 
 const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
   fastify: any
   // options
 ) => {
   fastify.register(swagger, {
+    openapi: {
+      info: {
+        title: 'Task Management API',
+        version: '1.0.0',
+      },
+      components: {
+        schemas: {
+          User: Users.jsonSchema,
+        },
+      },
+      servers: [{ url: 'http://localhost:3000' }],
+    },
     swagger: {
       info: {
         title: 'Task Management Backend',
@@ -26,12 +39,12 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
         },
       },
       security: [{ bearerAuth: [] }],
+      servers: [{ url: 'http://localhost:6001' }],
     },
     exposeRoute: true,
   });
   fastify.register(fastifySwaggerUi, {
     routePrefix: '/docs',
-
     // transformStaticHtml: (html: any) => {
     //   console.log('🚀 ~ html:', html);
     //   return html.replace(

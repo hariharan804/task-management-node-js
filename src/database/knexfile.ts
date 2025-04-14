@@ -1,51 +1,48 @@
-/* eslint-disable import/order */
 import { config } from 'dotenv';
-import { Knex } from 'knex';
 import { resolve } from 'path';
 
+// Load .env based on environment
 const env = process.env.NODE_ENV || 'development';
-// config({ path: `.env.${env}` });
-console.log(
-  '🚀 ~ resolve(__dirname, ',
-  resolve(__dirname, '..', '..', `.env.${env}`)
-);
+const envPath = resolve(__dirname, '..', '..', `.env.${env}`);
+config({ path: envPath });
 
-config({ path: resolve(__dirname, '..', '..', `.env.${env}`) });
+console.log('🌱 Loaded environment:', `.env.${env}`);
+console.log('🔑 DB Host:', process.env.DB_HOST);
 
-console.log('🚀 ~ DB env :', `.env.${env}`);
+// Destructure environment variables with fallback
+const {
+  DB_HOST = 'localhost',
+  DB_PORT = 5432,
+  DB_NAME = 'mydb',
+  DB_USERNAME = 'user',
+  DB_PASSWORD = 'password',
+  DB_DEBUG,
+} = process.env;
 
-interface IKnexConfig {
-  [key: string]: Knex.Config;
-}
-
-const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD }: any =
-  process.env;
-
-const migrationsPath = './migrations';
-
-const configs: IKnexConfig = {
+// Knex configuration map
+const configs = {
   development: {
     client: 'postgresql',
     connection: {
       host: DB_HOST,
+      port: Number(DB_PORT),
       database: DB_NAME,
       user: DB_USERNAME,
       password: DB_PASSWORD,
-      port: DB_PORT,
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    pool: { min: 2, max: 10 },
     migrations: {
       tableName: 'knex_migrations',
-      extension: 'ts',
-      directory: migrationsPath,
+      extension: 'mjs',
+      directory: './migrations',
+      loadExtensions: ['.mjs'],
     },
     seeds: {
+      extension: 'mjs',
       directory: './seeders',
+      loadExtensions: ['.mjs'],
     },
-    debug: !!process.env.DB_DEBUG,
+    debug: DB_DEBUG === 'true',
     useNullAsDefault: true,
   },
 
@@ -53,24 +50,24 @@ const configs: IKnexConfig = {
     client: 'postgresql',
     connection: {
       host: DB_HOST,
+      port: Number(DB_PORT),
       database: DB_NAME,
       user: DB_USERNAME,
       password: DB_PASSWORD,
-      port: DB_PORT,
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    pool: { min: 2, max: 10 },
     migrations: {
       tableName: 'knex_migrations',
-      directory: migrationsPath,
-      extension: '.ts',
+      extension: 'mjs',
+      directory: './migrations',
+      loadExtensions: ['.mjs'],
     },
     seeds: {
+      extension: 'mjs',
       directory: './seeders',
+      loadExtensions: ['.mjs'],
     },
-    debug: !!process.env.DB_DEBUG,
+    debug: DB_DEBUG === 'true',
     useNullAsDefault: true,
   },
 
@@ -78,22 +75,22 @@ const configs: IKnexConfig = {
     client: 'postgresql',
     connection: {
       host: DB_HOST,
+      port: Number(DB_PORT),
       database: DB_NAME,
       user: DB_USERNAME,
       password: DB_PASSWORD,
-      port: DB_PORT,
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    pool: { min: 2, max: 10 },
     migrations: {
       tableName: 'knex_migrations',
-      directory: migrationsPath,
-      extension: '.ts',
+      extension: 'mjs',
+      directory: './migrations',
+      loadExtensions: ['.mjs'],
     },
     seeds: {
+      extension: 'mjs',
       directory: './seeders',
+      loadExtensions: ['.mjs'],
     },
     useNullAsDefault: true,
   },

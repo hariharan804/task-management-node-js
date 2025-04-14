@@ -11,7 +11,7 @@ async function runEsbuild() {
   const outdir = 'dist';
 
   console.log(
-    '🚀 ~ Starting esbuild in',
+    '🚀 Starting esbuild in',
     isWatchMode ? 'watch' : 'build',
     'mode'
   );

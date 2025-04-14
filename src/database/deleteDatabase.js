@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const knex = require('knex');
 
-// const DB_HOST = 'localhost',
-//   DB_NAME = 'blog',
-//   DB_USERNAME = 'postgres',
-//   DB_PASSWORD = '1234',
-//   DB_PORT = '5432',
-//   DB_DEBUG = false;
-const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env;
+const DB_HOST = 'localhost',
+  DB_NAME = 'task_management',
+  DB_USERNAME = 'postgres',
+  DB_PASSWORD = '1234',
+  DB_PORT = '5432';
+// DB_DEBUG = false;
+// const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env;
+console.log(
+  '🚀 ~ DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD :',
+  DB_HOST,
+  DB_PORT,
+  DB_NAME,
+  DB_USERNAME,
+  DB_PASSWORD
+);
 // const DB_HOST = 'aws-0-ap-south-1.pooler.supabase.com',
 //   DB_NAME = 'postgres',
 //   DB_USERNAME = 'postgres.fwnzjmsuzjcmgdsqyxbs',
