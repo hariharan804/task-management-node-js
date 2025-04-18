@@ -1,0 +1,40 @@
+import { {{ pascalCase modalName}} } from '../../models/{{ camelCase modalName}}';
+
+class {{ pascalCase moduleName}}Service {
+  async get{{ pascalCase routeName}}ById(id: string) {
+    const retrievedData = await {{ pascalCase modalName}}.query().findById(id);
+    return retrievedData;
+  }
+
+  async getAll{{ pascalCase routeName}}(page = 1, limit = 10) {
+    const result = await {{ pascalCase modalName}}.query()
+      .page(page - 1, limit)
+      .orderBy('id', 'desc');
+
+    return {
+      list: result.results,
+      overAllCount: result.total,
+      page,
+      limit,
+      totalPages: Math.ceil(result.total / limit),
+    };
+  }
+
+  async create{{ pascalCase routeName}}(data: Partial<{{ pascalCase modalName}}>) {
+    const createdData = await {{ pascalCase modalName}}.query().insert(data);
+    return createdData;
+  }
+
+  async update{{ pascalCase routeName}}(id: number, data: Partial<{{ pascalCase modalName}}>) {
+    const updatedData  = await {{ pascalCase modalName}}.query()
+      .patchAndFetchById(id, data);
+    return updatedData;
+  }
+
+  async delete{{ pascalCase routeName}}(id: number, data?: Partial<{{ pascalCase modalName}}>) {
+    await {{ pascalCase modalName}}.query().patchAndFetchById(id, data ? data : {is_deleted: true});
+    return true;
+  }
+}
+
+export const {{ camelCase moduleName }}Service = new {{ pascalCase moduleName}}Service();

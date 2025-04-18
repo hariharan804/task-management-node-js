@@ -2,7 +2,7 @@ import { pagination } from './pagination';
 interface GetServicePayload {
   list: Array<object>;
   count: number;
-  totalCount: number;
+  overAllCount: number;
   page: number;
   limit: number;
 }
@@ -13,7 +13,7 @@ export interface PaginationResponse {
   limit?: number;
   page?: number;
   totalPages?: number;
-  totalCount?: number;
+  overAllCount?: number;
   previousPage?: number | null;
   currentPage?: number;
   nextPage?: number | null;
@@ -23,12 +23,12 @@ export interface PaginationResponse {
 export function paginationResponse(
   options: GetServicePayload
 ): PaginationResponse {
-  const { list, count, totalCount, page, limit, ...rest } = options;
+  const { list, count, overAllCount, page, limit, ...rest } = options;
 
   const paginationResult = pagination({
     page,
     limit,
-    totalCount,
+    overAllCount,
   });
 
   const response: PaginationResponse = {

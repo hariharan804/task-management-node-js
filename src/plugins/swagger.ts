@@ -19,7 +19,7 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
           User: Users.jsonSchema,
         },
       },
-      servers: [{ url: 'http://localhost:3000' }],
+      servers: [{ url: 'http://localhost:6001' }],
     },
     swagger: {
       info: {

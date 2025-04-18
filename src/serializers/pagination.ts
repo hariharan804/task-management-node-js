@@ -1,6 +1,6 @@
 type PaginationResult = {
   totalPages: number;
-  totalCount: number;
+  overAllCount: number;
   previousPage: number | null;
   currentPage: number;
   nextPage: number | null;
@@ -8,17 +8,17 @@ type PaginationResult = {
 export function pagination(options: {
   page?: number;
   limit: number;
-  totalCount: number;
+  overAllCount: number;
 }): PaginationResult {
-  const { limit, page = 1, totalCount } = options;
+  const { limit, page = 1, overAllCount } = options;
 
-  const totalPages = Math.ceil(totalCount / limit);
+  const totalPages = Math.ceil(overAllCount / limit);
 
   return {
     totalPages,
-    totalCount,
+    overAllCount,
     previousPage: page === 1 ? null : page - 1,
     currentPage: page,
-    nextPage: page < totalPages ? page + 1 : null,
+    nextPage: page < overAllCount ? page + 1 : null,
   };
 }

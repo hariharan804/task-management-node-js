@@ -4,15 +4,15 @@ import S from 'fluent-json-schema';
 import { handleResponse, responseType } from 'helpers/responseHandler';
 import { withTryCatch } from 'helpers/withTryCatch';
 import { paramsRequestInfo } from 'mappers/paramsRequest';
-import { Users } from 'models/users';
+import { {{ camelCase moduleName }}Service } from '../{{ camelCase moduleName }}.service';
 
-export class UserGetByIdHandler {
+export class {{ pascalCase routeName }}UpdateHandler {
   static handle: (
     request: FastifyRequest,
     reply: FastifyReply
   ) => Promise<void> = withTryCatch(async (request, reply) => {
-    const { id } = paramsRequestInfo(request);
-    const data = await Users.query().select().where({ id: id }).first();
+    const bodyData = paramsRequestInfo(request);
+    const data = await {{ camelCase moduleName }}Service.update{{ pascalCase routeName}}(bodyData);
 
     return handleResponse(request, reply, responseType.OK, {
       data: data,
@@ -22,21 +22,12 @@ export class UserGetByIdHandler {
   static schema: RouteShorthandOptions = {
     attachValidation: true,
     schema: {
-      description: 'Get a user by ID',
-      tags: ['User'],
-      params: S.object().prop('id', S.string()).required(),
+      description: 'Update a existing data of {{ pascalCase routeName }}',
+      tags: ['{{ pascalCase  moduleName }}'],
+      body: S.object().prop('id', S.string()).required(),
       response: makeResponseSchema(
         S.object()
           .prop('id', S.string())
-          .prop('roleId', S.string())
-          .prop('name', S.string())
-          .prop('firebase_id', S.string())
-          .prop('email', S.string())
-          .prop('is_active', S.boolean())
-          .prop('created_by', S.string())
-          .prop('updated_by', S.string())
-          .prop('created_at', S.string().format('date-time'))
-          .prop('updated_at', S.string().format('date-time'))
       ),
     },
   };

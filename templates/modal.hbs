@@ -1,0 +1,46 @@
+import { Model } from 'objection';
+import { BaseModel } from './baseModel';
+
+export class {{ pascalCase modalName}} extends BaseModel {
+  static get tableName() {
+    return '{{snakeCase modalName }}';
+  }
+
+  name!: string;
+ 
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['id', 'client_id'],
+      properties: {
+        // indexed columns
+        id: { type: 'string', format: 'uuid' },
+        client_id: { type: 'string', format: 'uuid' },
+        // Other columns
+        name: { type: 'string' },
+        // basic columns
+        created_by: { type: 'string', format: 'uuid' },
+        updated_by: { type: 'string', format: 'uuid' },
+        created_at: {
+          type: 'string',
+          format: 'date-time',
+        },
+        updated_at: {
+          type: 'string',
+          format: 'date-time',
+        },
+      },
+    };
+  }
+
+ // static relationMappings = {
+ //     relationName: {
+ //       relation: Model.BelongsToOneRelation,
+ //       modelClass: __dirname + '/tableName', // path to RoleMasters model
+ //       join: {
+ //         from: 'users.role_id',
+ //         to: 'role_masters.id',
+ //       },
+ //     },
+ //   };
+}

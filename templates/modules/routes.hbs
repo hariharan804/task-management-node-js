@@ -1,0 +1,16 @@
+import { type FastifyPluginAsync } from 'fastify';
+import { {{ pascalCase routeName }}GetByIdHandler } from './controllers/get{{ pascalCase routeName}}ById';
+import { {{ pascalCase routeName }}GetAllHandler } from './controllers/getAll{{ pascalCase routeName}}';
+import { {{ pascalCase routeName }}CreateHandler } from './controllers/create{{ pascalCase routeName}}';
+import { {{ pascalCase routeName }}UpdateHandler } from './controllers/update{{ pascalCase routeName}}';
+import { {{ pascalCase routeName }}DeleteHandler } from './controllers/delete{{ pascalCase routeName}}';
+
+export const {{ camelCase routeName }}Routes: FastifyPluginAsync = async (
+  fastify
+): Promise<void> => {
+  fastify.get('/:id', {{ pascalCase routeName }}GetByIdHandler.schema, {{ pascalCase routeName }}GetByIdHandler.handle);
+  fastify.get('/', {{ pascalCase routeName }}GetAllHandler.schema, {{ pascalCase routeName }}GetAllHandler.handle); // get all
+  fastify.post('/', {{ pascalCase routeName }}CreateHandler.schema, {{ pascalCase routeName }}CreateHandler.handle);
+  fastify.patch('/', {{ pascalCase routeName }}UpdateHandler.schema, {{ pascalCase routeName }}UpdateHandler.handle);
+  fastify.delete('/:id', {{ pascalCase routeName }}DeleteHandler.schema, {{ pascalCase routeName }}DeleteHandler.handle);
+};

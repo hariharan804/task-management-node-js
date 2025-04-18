@@ -1,5 +1,8 @@
 import type { FastifyInstance } from 'fastify';
 import { authMiddleware } from 'middlewares/auth';
+// Don't remove this comment
+// ### APPEND ROUTES_IMPORT HERE ###
+
 import { userRoutes } from 'modules/users/users.routes';
 
 // import { readdirSync } from 'fs';
@@ -35,6 +38,9 @@ export default async function privateRoutes(fastify: FastifyInstance) {
   authGroup.addHook('preHandler', authMiddleware); // Apply authentication to all routes
 
   // Register multiple private route modules its contains all private routes prefix /api/v1
+  // Don't remove this comment
+  // ### APPEND ROUTES HERE ###
+
   authGroup.register(userRoutes, { prefix: '/users' });
   // authGroup.register(orderRoutes, { prefix: '/orders' });
 }

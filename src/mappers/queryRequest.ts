@@ -6,6 +6,8 @@ interface RequestParameters {
   page: number;
   limit: number;
   search?: string;
+  sortBy?: string;
+  sort: 'asc' | 'desc';
   rest?: { [key: string]: string | number };
 }
 
@@ -18,22 +20,26 @@ interface RequestParameters {
  */
 export function queryRequestInfo(request: any): RequestParameters {
   const {
-    query: { id, page = 1, limit = 10, search, ...rest },
+    query: { id, page = 1, limit = 10, search, sort = 'desc', sortBy, ...rest },
   } = request as {
     query: {
       id: string;
       page: string;
       limit: string;
       search: string;
+      sortBy: string;
+      sort: 'asc' | 'desc';
       rest: { [key: string]: string | number };
     };
   };
 
   return {
     id,
-    page: Number(page || 1),
-    limit: Number(limit || 10),
+    page: Number(page) > 0 ? Number(page) - 1 : 0,
+    limit: Number(limit) || 10,
     search,
+    sort,
+    sortBy,
     ...rest,
   };
 }
